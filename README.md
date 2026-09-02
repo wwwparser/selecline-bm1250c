@@ -1,5 +1,7 @@
 # Selecline BM1250C — сайт-инструкция
 
+**Опубликован: https://wwwparser.github.io/selecline-bm1250c/**
+
 Статический сайт с инструкцией, расшифровкой 15 программ и рецептами для хлебопечки
 **Selecline BM1250C**. Рассчитан на публикацию через GitHub Pages и на индексацию в Google
 и Яндексе по запросам вида «selecline bm1250c инструкция», «рецепты для хлебопечки selecline»,
@@ -9,7 +11,7 @@
 
 ## Что уже собрано
 
-16 страниц:
+17 страниц:
 
 | Страница | Что там |
 |---|---|
@@ -22,6 +24,7 @@
 | `/mery/` | перевод граммов и миллилитров в ложки |
 | `/specii/` | специи и добавки: что в муку, что по сигналу |
 | `/analog-judge-jea43/` | как опознали OEM-аналог и почему его инструкция подходит |
+| `/hlebopechka-auchan/` | хаб под запросы «хлебопечка Ашан / Auchan»: что за марка Selecline, как определить свою модель |
 | `/selecline-861382-bm1333/` | соседняя модель на 12 программ и рецепт из практики её владелицы |
 
 Плюс инфографика (всё inline SVG, без картинок): панель управления с дисплеем и 15 программами,
@@ -40,25 +43,34 @@ python build.py --serve    # собрать и открыть http://localhost:8
 
 Папку `docs/` не редактируют руками — она пересобирается целиком.
 
-## Как опубликовать на GitHub Pages
+## Публикация
 
-1. **Впишите свой адрес.** В `data/site.json` поле `site_url` — замените `USERNAME` на свой логин
-   GitHub, а `selecline-bm1250c` на имя репозитория. От этого зависят `canonical`, Open Graph и `sitemap.xml`.
-2. Пересоберите: `python build.py`.
-3. Создайте репозиторий и залейте:
-   ```bash
-   git init && git add . && git commit -m "Сайт-инструкция Selecline BM1250C"
-   git branch -M main
-   git remote add origin https://github.com/USERNAME/selecline-bm1250c.git
-   git push -u origin main
-   ```
-4. В репозитории: **Settings → Pages → Source: Deploy from a branch → Branch: `main`, папка `/docs`**.
-   Через минуту сайт открывается по `https://USERNAME.github.io/selecline-bm1250c/`.
-5. Добавьте сайт в [Google Search Console](https://search.google.com/search-console) и
-   [Яндекс.Вебмастер](https://webmaster.yandex.ru/), скормите `sitemap.xml`.
+Сайт уже опубликован: **https://wwwparser.github.io/selecline-bm1250c/**
+GitHub Pages раздаёт папку `docs/` ветки `main` (Settings → Pages → Deploy from a branch → `main` / `/docs`).
 
-Свой домен вместо `github.io`: положите файл `CNAME` с доменом в `static/`, добавьте его копирование
-в `build.py` и пропишите DNS по инструкции GitHub. `site_url` тоже поменяйте.
+Обновление после правок:
+
+```bash
+python build.py
+git add -A && git commit -m "Что изменилось" && git push
+```
+
+Через минуту-две изменения на сайте.
+
+### Что осталось сделать вручную
+
+1. Добавить сайт в [Google Search Console](https://search.google.com/search-console) и
+   [Яндекс.Вебмастер](https://webmaster.yandex.ru/), скормить
+   `https://wwwparser.github.io/selecline-bm1250c/sitemap.xml`.
+2. Оставить ссылку в теме про BM1250C на hlebopechka.ru и в отзыве на otzovik.com —
+   это и живой трафик, и ускорение индексации.
+3. Заменить SVG-схемы реальными фото своей печки (панель, ведёрко, колобок на 15-й минуте,
+   готовая буханка) — уникальные фото по этой модели усилят страницы.
+
+### Свой домен вместо github.io
+
+Положите файл `CNAME` с доменом в `static/`, добавьте его копирование в `build.py`,
+пропишите DNS по инструкции GitHub и поменяйте `site_url` в `data/site.json`.
 
 ## Как добавить рецепт
 
