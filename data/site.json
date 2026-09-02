@@ -1,0 +1,39 @@
+{
+  "site_name": "Selecline BM1250C",
+  "site_tagline": "хлебопечка Ашан — инструкция, программы и рецепты",
+  "site_url": "https://wwwparser.github.io/selecline-bm1250c",
+  "author": "Владелец Selecline BM1250C",
+  "lang": "ru",
+  "nav": [
+    {
+      "url": "instrukciya/",
+      "title": "Инструкция"
+    },
+    {
+      "url": "programmy/",
+      "title": "15 программ"
+    },
+    {
+      "url": "recepty/",
+      "title": "Рецепты"
+    },
+    {
+      "url": "kolobok/",
+      "title": "Колобок"
+    },
+    {
+      "url": "mery/",
+      "title": "Меры"
+    },
+    {
+      "url": "hlebopechka-auchan/",
+      "title": "Печки Ашан"
+    },
+    {
+      "url": "analog-judge-jea43/",
+      "title": "Аналог печки"
+    }
+  ],
+  "brand": "Selecline",
+  "retailer": "Ашан (Auchan)"
+}

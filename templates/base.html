@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ page_description }}">
+{% if keywords %}<meta name="keywords" content="{{ keywords|join(', ') }}">{% endif %}
+<link rel="canonical" href="{{ site.site_url }}/{{ url }}">
+<meta property="og:type" content="{{ og_type|default('article') }}">
+<meta property="og:title" content="{{ page_title }}">
+<meta property="og:description" content="{{ page_description }}">
+<meta property="og:url" content="{{ site.site_url }}/{{ url }}">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="{{ site.site_name }} — {{ site.site_tagline }}">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="stylesheet" href="{{ rel }}style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🍞</text></svg>">
+<script>try{var t=localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}</script>
+{% for block in jsonld %}
+<script type="application/ld+json">{{ block|safe }}</script>
+{% endfor %}
+</head>
+<body>
+{% include "icons.html" %}
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="{{ rel if rel else './' }}">🍞 <span>Selecline BM1250C<small>инструкция и рецепты</small></span></a>
+    <nav class="site-nav" aria-label="Основная навигация">
+      {% for item in site.nav %}
+      <a href="{{ rel }}{{ item.url }}"{% if url.startswith(item.url) %} aria-current="page"{% endif %}>{{ item.title }}</a>
+      {% endfor %}
+    </nav>
+    <button class="theme-btn" type="button" aria-label="Переключить тему" onclick="var d=document.documentElement,n=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}">◐</button>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    {% if breadcrumbs %}
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+      {% for b in breadcrumbs %}{% if not loop.last %}<a href="{{ rel }}{{ b.url }}">{{ b.title }}</a> → {% else %}{{ b.title }}{% endif %}{% endfor %}
+    </nav>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Selecline BM1250C</strong> — неофициальный справочник владельца. Материалы собраны из книги рецептов
+      <a href="{{ rel }}analog-judge-jea43/">Judge JEA43</a> (та же аппаратная платформа), отзывов владельцев и личной практики.</p>
+    <p>Сайт не связан с производителем и торговой сетью и не является официальной документацией. Проверяйте настройки по бумажной инструкции к своей печке.</p>
+    <p>{% for item in site.nav %}<a href="{{ rel }}{{ item.url }}">{{ item.title }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+  </div>
+</footer>
+</body>
+</html>

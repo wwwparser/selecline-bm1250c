@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% import "ig.html" as ig %}
+{% block content %}
+<article>
+  <h1>{{ h1 }}</h1>
+  {% if lead %}<p class="lead">{{ lead }}</p>{% endif %}
+  {{ body|safe }}
+</article>
+{% endblock %}

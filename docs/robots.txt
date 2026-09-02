@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wwwparser.github.io/selecline-bm1250c/sitemap.xml
