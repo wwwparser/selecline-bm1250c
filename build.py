@@ -276,7 +276,8 @@ def build(serve: bool = False) -> None:
         urls.append((url, "0.8" if r.get("featured") else "0.7"))
 
     # ---- статика и служебные файлы
-    shutil.copy(ROOT / "static" / "style.css", OUT / "style.css")
+    # вся папка static/ ложится в корень сайта (style.css, manual/*.pdf и т. д.)
+    shutil.copytree(ROOT / "static", OUT, dirs_exist_ok=True)
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
 
     today = date.today().isoformat()

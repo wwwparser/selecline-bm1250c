@@ -62,17 +62,26 @@ a:hover { color: var(--ink-strong); }
   border-bottom: 1px solid var(--line);
   position: sticky; top: 0; z-index: 20;
 }
-.site-header .wrap { display: flex; align-items: center; gap: 16px; min-height: 62px; flex-wrap: wrap; }
-.brand { font-weight: 700; color: var(--ink-strong); text-decoration: none; font-size: 17px; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+.site-header .wrap { display: flex; align-items: center; gap: 14px; min-height: 62px; flex-wrap: nowrap; }
+.brand { flex: 0 0 auto; font-weight: 700; color: var(--ink-strong); text-decoration: none; font-size: 17px; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
 .brand small { display: block; font-weight: 400; font-size: 12px; color: var(--muted); }
-.site-nav { display: flex; gap: 4px; flex-wrap: wrap; margin-left: auto; }
+/* меню всегда в одну строку; если не влезает — прокручивается вбок */
+.site-nav {
+  display: flex; gap: 4px; margin-left: auto;
+  flex-wrap: nowrap; overflow-x: auto; min-width: 0;
+  scrollbar-width: none; -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  mask-image: linear-gradient(to right, #000 calc(100% - 18px), transparent);
+}
+.site-nav::-webkit-scrollbar { display: none; }
 .site-nav a {
   text-decoration: none; color: var(--ink); font-size: 14.5px;
-  padding: 5px 10px; border-radius: 999px;
+  padding: 5px 10px; border-radius: 999px; white-space: nowrap;
 }
 .site-nav a:hover { background: var(--surface-2); }
 .site-nav a[aria-current="page"] { background: var(--green-soft); color: var(--green-ink); font-weight: 600; }
 .theme-btn {
+  flex: 0 0 auto;
   border: 1px solid var(--line); background: var(--surface); color: var(--muted);
   border-radius: 999px; width: 32px; height: 32px; cursor: pointer; font-size: 15px; line-height: 1;
 }
