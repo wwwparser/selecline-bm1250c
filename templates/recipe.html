@@ -1,55 +1,64 @@
 {% extends "base.html" %}
 {% import "ig.html" as ig %}
 {% block content %}
+{% set flour = r.ingredients | selectattr("icon", "equalto", "flour") | map(attribute="qty") | join(" + ") %}
+{% set water = r.ingredients | selectattr("icon", "equalto", "water") | map(attribute="qty") | join(" ") %}
 
-<article>
-  <h1>{{ r.emoji }} {{ r.h1 }}</h1>
-  <ul class="badges">
-    <li class="badge">Программа {{ r.program.n }} {{ r.program.en }}</li>
-    <li class="badge">{{ r.program.time }}</li>
-    <li class="badge">{{ r.size }}</li>
-    <li class="badge alt">Корочка: {{ r.crust }}</li>
-  </ul>
+<div class="shell prose">
+{% include "crumbs.html" %}
+<article class="recipe">
+  <h1>{{ r.h1 }}</h1>
+  {% if flour and water %}<p class="r-ratio">{{ flour }} муки · {{ water }} воды</p>{% endif %}
+
+  <p class="r-setup">
+    <span class="r-prog">{{ r.program.en }} {{ r.program.n }}</span>
+    <span>{{ r.size.split('(')[0]|trim }}</span>
+    <span>{{ r.crust.split('—')[0]|trim }}</span>
+    <span class="r-time">{{ r.program.time }}</span>
+  </p>
 
   {{ r.lead_html|safe }}
 
-  <h2>Ингредиенты</h2>
-  <div class="card">
-    <ul class="ing-list">
-      {% for i in r.ingredients %}
-      <li>{{ ig.ico(i.icon) }}<span class="nm">{{ i.name }}</span><span class="qty">{{ i.qty }}{% if i.alt %}<span class="alt">{{ i.alt }}</span>{% endif %}</span></li>
-      {% endfor %}
-    </ul>
-  </div>
-  <p style="font-size:15px;color:var(--muted)">Выход: {{ r.yield }}. Не уверены в пересчёте ложек и граммов — см. <a href="{{ rel }}mery/">таблицу мер</a>.</p>
+  <h2 id="ingredienty">Ингредиенты</h2>
+  <dl class="qty qty-lg">
+    {% for i in r.ingredients %}
+    <dt>{{ i.qty }}</dt><dd>{{ i.name }}{% if i.alt %} <span>{{ i.alt }}</span>{% endif %}</dd>
+    {% endfor %}
+  </dl>
+  <p class="fine">Выход: {{ r.yield }}. Не уверены в пересчёте ложек и граммов — см.
+    <a href="{{ rel }}mery/">таблицу мер</a>.</p>
 
-  <h2>Как готовить</h2>
+  <h2 id="poryadok">Порядок</h2>
   <ol class="steps">
     {% for s in r.steps %}<li>{{ s }}</li>{% endfor %}
   </ol>
 
-  <h2>Настройки на панели</h2>
-  {{ ig.panel_svg(programs, "Настройки для программы " ~ r.program.n ~ " " ~ r.program.en) }}
+  <h2 id="panel">Настройки на панели</h2>
   <p>MENU → <strong>{{ r.program.n }} {{ r.program.en }}</strong> · LOAF SIZE → <strong>{{ r.size }}</strong> ·
-     COLOUR → <strong>{{ r.crust }}</strong> · на дисплее <strong>{{ r.program.time }}</strong> → START.
-     Все режимы разобраны на странице <a href="{{ rel }}programmy/">15 программ печки</a>.</p>
+    COLOUR → <strong>{{ r.crust }}</strong> · на дисплее <strong>{{ r.program.time }}</strong> → START.
+    Все режимы разобраны на странице <a href="{{ rel }}programmy/">15 программ печки</a>.</p>
+  {{ ig.panel_svg(programs, "Настройки для программы " ~ r.program.n ~ " " ~ r.program.en) }}
 
-  <h2>Заметки</h2>
+  <h2 id="kolobok">Контроль колобка</h2>
+  <p>Через 10–15 минут после старта загляните под крышку. Это единственная проверка, которая действительно
+    влияет на результат: мука у разных производителей забирает разное количество воды.</p>
+  {{ ig.dough_states(rel, compact=true) }}
+  <p class="fine">Разбор всех случаев — на странице <a href="{{ rel }}kolobok/">про колобок</a>.</p>
+
+  <h2 id="posle">После выпечки</h2>
+  <ul class="ticks">
+    <li>{{ ig.ico("mitt") }}<span>Доставайте ведёрко только прихватками — оно раскалено.</span></li>
+    <li>{{ ig.ico("clock") }}<span>Остудите буханку 30–60 минут на решётке и только потом режьте.</span></li>
+    <li>{{ ig.ico("bell") }}<span>Печка держит хлеб тёплым ещё около часа, но корочка при этом размягчается.</span></li>
+  </ul>
+
+  <h2 id="zametki">Заметки</h2>
   {{ r.tips_html|safe }}
 
-  <div class="note">{{ ig.ico("bulb") }}<div><b>Главная проверка — колобок.</b> Через 10–15 минут после старта загляните под крышку: тесто должно собраться в мягкий гладкий шар и подобрать муку со стенок. Что делать, если это не так — <a href="{{ rel }}kolobok/">на отдельной странице</a>.</div></div>
-
-  <p style="font-size:14.5px;color:var(--muted)">Источник рецептуры: {{ r.source_html|safe }}</p>
+  <p class="fine">Источник рецептуры: {{ r.source_html|safe }}</p>
 </article>
 
-<h2>Другие рецепты</h2>
-<div class="grid">
-  {% for o in others %}
-  <a class="rcard" href="{{ rel }}recepty/{{ o.slug }}/">
-    <span class="emoji">{{ o.emoji }}</span>
-    <b>{{ o.h1 }}</b>
-    <span>Программа {{ o.program.n }} {{ o.program.en }} · {{ o.program.time }} · {{ o.size }}</span>
-  </a>
-  {% endfor %}
+<h2 id="drugie">Другие рецепты</h2>
+{{ ig.recipe_list(others, rel) }}
 </div>
 {% endblock %}

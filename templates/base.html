@@ -14,8 +14,13 @@
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="{{ site.site_name }} — {{ site.site_tagline }}">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#f7f3ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14120f" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="{{ rel }}style.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🍞</text></svg>">
+<link rel="icon" href="{{ rel }}favicon.svg" type="image/svg+xml">
 <script>try{var t=localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}</script>
 {% for block in jsonld %}
 <script type="application/ld+json">{{ block|safe }}</script>
@@ -23,37 +28,103 @@
 </head>
 <body>
 {% include "icons.html" %}
+<a class="skip" href="#main">К содержанию</a>
 
-<header class="site-header">
-  <div class="wrap">
-    <a class="brand" href="{{ rel if rel else './' }}">🍞 <span>Selecline BM1250C<small>инструкция и рецепты</small></span></a>
-    <nav class="site-nav" aria-label="Основная навигация">
-      {% for item in site.nav %}
-      <a href="{{ rel }}{{ item.url }}"{% if url.startswith(item.url) %} aria-current="page"{% endif %}>{{ item.title }}</a>
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="{{ rel if rel else './' }}">
+      <svg class="brand-mark" viewBox="0 0 34 24" aria-hidden="true">
+        <path d="M3 14.5A6.5 6.5 0 0 1 9.5 8h15a6.5 6.5 0 0 1 0 13h-15A6.5 6.5 0 0 1 3 14.5Z" fill="none" stroke="currentColor" stroke-width="1.9"/>
+        <path d="M11 8.4V21M17 8.2V21M23 8.4V21" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".55"/>
+        <path d="M8.5 8c.6-3.2 3-5 6-5s5.4 1.8 6 5" fill="none" stroke="currentColor" stroke-width="1.7" opacity=".45"/>
+      </svg>
+      <span class="brand-t">Selecline BM1250C<span class="brand-s">неофициальная инструкция</span></span>
+    </a>
+
+    <nav class="nav" aria-label="Основные разделы">
+      {% for item in site.nav_primary %}
+      <a href="{{ rel }}{{ item.url }}{{ item.anchor|default('') }}"{% if not item.anchor and item.url and url.startswith(item.url) %} aria-current="page"{% endif %}>{{ item.title }}</a>
       {% endfor %}
+      <details class="more">
+        <summary aria-label="Другие разделы">Ещё<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+        <div class="more-menu">
+          {% for item in site.nav_more %}
+          <a href="{{ rel }}{{ item.url }}"{% if url.startswith(item.url) %} aria-current="page"{% endif %}>{{ item.title }}</a>
+          {% endfor %}
+        </div>
+      </details>
     </nav>
-    <button class="theme-btn" type="button" aria-label="Переключить тему" onclick="var d=document.documentElement,n=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}">◐</button>
+
+    <button class="ibtn theme-btn" type="button" id="themeBtn" aria-label="Переключить тёмную тему">
+      <svg class="i-light" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-moon"/></svg>
+      <svg class="i-dark" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-sun"/></svg>
+    </button>
+    <button class="ibtn burger" type="button" id="burger" aria-label="Меню разделов" aria-expanded="false" aria-controls="mobnav">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bars"/></svg>
+    </button>
   </div>
+
+  <nav class="mobnav" id="mobnav" aria-label="Все разделы" hidden>
+    {% for item in site.nav_primary %}
+    <a href="{{ rel }}{{ item.url }}{{ item.anchor|default('') }}">{{ item.title }}</a>
+    {% endfor %}
+    <span class="mobnav-sep">Дальше по теме</span>
+    {% for item in site.nav_more %}
+    <a href="{{ rel }}{{ item.url }}">{{ item.title }}</a>
+    {% endfor %}
+  </nav>
 </header>
 
-<main>
-  <div class="wrap">
-    {% if breadcrumbs %}
-    <nav class="breadcrumbs" aria-label="Хлебные крошки">
-      {% for b in breadcrumbs %}{% if not loop.last %}<a href="{{ rel }}{{ b.url }}">{{ b.title }}</a> → {% else %}{{ b.title }}{% endif %}{% endfor %}
-    </nav>
-    {% endif %}
-    {% block content %}{% endblock %}
-  </div>
+<main id="main">
+  {% block content %}{% endblock %}
 </main>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <p><strong>Selecline BM1250C</strong> — неофициальный справочник владельца. Материалы собраны из книги рецептов
-      <a href="{{ rel }}analog-judge-jea43/">Judge JEA43</a> (та же аппаратная платформа), отзывов владельцев и личной практики.</p>
-    <p>Сайт не связан с производителем и торговой сетью и не является официальной документацией. Проверяйте настройки по бумажной инструкции к своей печке.</p>
-    <p>{% for item in site.nav %}<a href="{{ rel }}{{ item.url }}">{{ item.title }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+<footer class="ftr">
+  <div class="shell ftr-in">
+    <div class="ftr-about">
+      <p class="ftr-brand">Selecline BM1250C</p>
+      <p>Неофициальный справочник владельца. Материалы собраны из книги рецептов
+        <a href="{{ rel }}analog-judge-jea43/">Judge JEA43</a> — печки на той же аппаратной платформе, — из отзывов
+        владельцев и личной практики.</p>
+      <p>Сайт не связан с производителем и торговой сетью и не является официальной документацией.
+        Проверяйте настройки по бумажной инструкции к своей печке.</p>
+    </div>
+    <div class="ftr-nav">
+      <p class="ftr-h">Основное</p>
+      {% for item in site.nav_primary %}<a href="{{ rel }}{{ item.url }}{{ item.anchor|default('') }}">{{ item.title }}</a>{% endfor %}
+    </div>
+    <div class="ftr-nav">
+      <p class="ftr-h">Дальше по теме</p>
+      {% for item in site.nav_more %}<a href="{{ rel }}{{ item.url }}">{{ item.title }}</a>{% endfor %}
+    </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  var d=document.documentElement;
+  var tb=document.getElementById('themeBtn');
+  if(tb)tb.addEventListener('click',function(){
+    var n=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=n;
+    try{localStorage.setItem('theme',n)}catch(e){}
+  });
+  var b=document.getElementById('burger'),m=document.getElementById('mobnav');
+  if(b&&m)b.addEventListener('click',function(){
+    var open=m.hasAttribute('hidden');
+    if(open){m.removeAttribute('hidden')}else{m.setAttribute('hidden','')}
+    b.setAttribute('aria-expanded',open?'true':'false');
+  });
+  document.addEventListener('click',function(e){
+    document.querySelectorAll('details.more[open]').forEach(function(el){
+      if(!el.contains(e.target))el.removeAttribute('open');
+    });
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Escape')return;
+    document.querySelectorAll('details.more[open]').forEach(function(el){el.removeAttribute('open')});
+    if(m&&!m.hasAttribute('hidden')){m.setAttribute('hidden','');b.setAttribute('aria-expanded','false')}
+  });
+})();
+</script>
 </body>
 </html>

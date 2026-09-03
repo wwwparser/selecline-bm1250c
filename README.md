@@ -84,7 +84,7 @@ git add -A && git commit -m "Что изменилось" && git push
 Допишите объект в `data/recipes.json` и пересоберите. Всё остальное — страница, карточка в списке,
 строка в сводной таблице, разметка `Recipe`, запись в `sitemap.xml` — появится само.
 
-Поля: `slug`, `emoji`, `h1`, `title`, `description`, `keywords`, `featured`, `program`, `size`,
+Поля: `slug`, `h1`, `title`, `description`, `keywords`, `featured`, `program`, `size`,
 `crust`, `yield`, `prep_min`, `cook_min`, `lead_html`, `ingredients`, `steps`, `tips_html`, `source_html`.
 Иконка ингредиента (`icon`) — одно из: `water`, `oil`, `salt`, `sugar`, `flour`, `yeast`, `milk`,
 `butter`, `fruit`, `spice`.
@@ -103,7 +103,8 @@ git add -A && git commit -m "Что изменилось" && git push
   "description": "Описание для сниппета",
   "keywords": ["запрос 1", "запрос 2"],
   "lead": "Подзаголовок под H1",
-  "priority": "0.7"
+  "priority": "0.7",
+  "toc": true
 }
 -->
 {% import "ig.html" as ig %}
@@ -111,28 +112,35 @@ git add -A && git commit -m "Что изменилось" && git push
 {{ ig.panel_svg(programs) }}
 ```
 
-Чтобы страница попала в верхнее меню — добавьте её в `nav` в `data/site.json`.
+Заголовки `<h2>` автоматически получают якоря, и если их четыре и больше — на странице появляется
+боковое оглавление «На этой странице» (на телефоне сворачивается в один пункт). Отключается
+полем `"toc": false` в настройках страницы.
+
+Чтобы страница попала в верхнее меню — добавьте её в `nav_primary` (четыре основных пункта)
+или в `nav_more` (выпадающий список «Ещё») в `data/site.json`.
 
 ## Структура
 
 ```
 build.py              генератор (Python + Jinja2)
 data/
-  site.json           название, адрес сайта, меню
+  site.json           название, адрес сайта, меню (nav_primary + nav_more)
   machine.json        программы, кнопки, размеры, таблица мер
   recipes.json        рецепты
   faq.json            вопросы и ответы для главной
   pages/*.html        контентные страницы с JSON-блоком настроек
 templates/
   base.html           каркас: head, шапка, подвал, JSON-LD
+  crumbs.html         хлебные крошки
   index.html          главная
   page.html           обычная страница
   recipe.html         рецепт
   recipes_index.html  список рецептов
-  ig.html             макросы инфографики (SVG-схемы, карточка быстрого старта)
+  ig.html             макросы: SVG-схемы, лист «быстрый старт», список рецептов
   icons.html          спрайт иконок
 static/               содержимое раздаётся из корня сайта
-  style.css           единственный CSS, светлая и тёмная тема
+  style.css           единственный CSS: дизайн-система на CSS-переменных, светлая и тёмная тема
+  favicon.svg         иконка сайта
   manual/*.pdf        оригинальная английская инструкция
 docs/                 СГЕНЕРИРОВАННЫЙ сайт — его и раздаёт GitHub Pages
 ```

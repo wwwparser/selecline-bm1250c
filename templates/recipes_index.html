@@ -1,42 +1,37 @@
 {% extends "base.html" %}
 {% import "ig.html" as ig %}
 {% block content %}
-<h1>Рецепты для хлебопечки Selecline BM1250C</h1>
-<p class="lead">Семь рецептов под конкретные программы этой печки — в граммах и миллилитрах, с указанием размера
-буханки и цвета корочки. Основа — книга рецептов <a href="{{ rel }}analog-judge-jea43/">Judge JEA43</a>,
-печки на том же контроллере.</p>
+<div class="shell prose">
+  {% include "crumbs.html" %}
+  <h1>Рецепты для хлебопечки Selecline BM1250C</h1>
+  <p class="lead">Семь рецептов под конкретные программы этой печки — в граммах и миллилитрах, с указанием размера
+    буханки и цвета корочки. Основа — книга рецептов <a href="{{ rel }}analog-judge-jea43/">Judge JEA43</a>,
+    печки на том же контроллере.</p>
 
-<div class="grid">
-  {% for o in recipes %}
-  <a class="rcard" href="{{ rel }}recepty/{{ o.slug }}/">
-    <span class="emoji">{{ o.emoji }}</span>
-    <b>{{ o.h1 }}</b>
-    <span>Программа {{ o.program.n }} {{ o.program.en }} · {{ o.program.time }} · {{ o.size }}</span>
-  </a>
-  {% endfor %}
+  {{ ig.recipe_list(recipes, rel) }}
+
+  <h2 id="svodnaya-tablica">Сводная таблица закладок</h2>
+  <p>Быстрое сравнение: сколько воды идёт на муку в каждом рецепте. Именно это соотношение определяет, получится
+    хлеб или в углах ведёрка останется сухая мука.</p>
+  <div class="table-wrap">
+    <table class="tbl-stack">
+      <thead><tr><th>Рецепт</th><th>Программа</th><th>Мука</th><th>Вода</th><th>Дрожжи</th><th>Размер</th></tr></thead>
+      <tbody>
+        {% for o in recipes %}
+        <tr>
+          <td data-l="Рецепт"><a href="{{ rel }}recepty/{{ o.slug }}/">{{ o.h1 }}</a></td>
+          <td data-l="Программа" class="num">{{ o.program.n }} {{ o.program.en }}</td>
+          <td data-l="Мука" class="num">{{ o.ingredients | selectattr("icon", "equalto", "flour") | map(attribute="qty") | join(" + ") }}</td>
+          <td data-l="Вода" class="num">{{ o.ingredients | selectattr("icon", "equalto", "water") | map(attribute="qty") | join(" ") }}</td>
+          <td data-l="Дрожжи" class="num">{{ o.ingredients | selectattr("icon", "equalto", "yeast") | map(attribute="qty") | join(" ") }}</td>
+          <td data-l="Размер" class="num">{{ o.size }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">{{ ig.ico("bulb") }}<div>Мука у разных производителей забирает разное количество воды. Цифры из таблицы —
+    отправная точка; финальную корректировку всегда делают <a href="{{ rel }}kolobok/">по колобку</a> на 10–15-й минуте замеса.</div></div>
 </div>
-
-<h2>Сводная таблица закладок</h2>
-<p>Быстрое сравнение: сколько воды идёт на муку в каждом рецепте. Именно это соотношение определяет, получится
-хлеб или в углах ведёрка останется сухая мука.</p>
-<div class="table-wrap">
-  <table>
-    <thead><tr><th>Рецепт</th><th>Программа</th><th>Мука</th><th>Вода</th><th>Дрожжи</th><th>Размер</th></tr></thead>
-    <tbody>
-      {% for o in recipes %}
-      <tr>
-        <td><a href="{{ rel }}recepty/{{ o.slug }}/">{{ o.h1 }}</a></td>
-        <td class="num">{{ o.program.n }} {{ o.program.en }}</td>
-        <td class="num">{{ o.ingredients | selectattr("icon", "equalto", "flour") | map(attribute="qty") | join(" + ") }}</td>
-        <td class="num">{{ o.ingredients | selectattr("icon", "equalto", "water") | map(attribute="qty") | join(" ") }}</td>
-        <td class="num">{{ o.ingredients | selectattr("icon", "equalto", "yeast") | map(attribute="qty") | join(" ") }}</td>
-        <td class="num">{{ o.size }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-
-<div class="note">{{ ig.ico("bulb") }}<div>Мука у разных производителей забирает разное количество воды. Цифры из таблицы —
-отправная точка; финальную корректировку всегда делают <a href="{{ rel }}kolobok/">по колобку</a> на 10–15-й минуте замеса.</div></div>
 {% endblock %}

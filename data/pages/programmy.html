@@ -22,19 +22,37 @@
 
 {{ ig.panel_svg(programs) }}
 
+<h2>Какую программу выбрать</h2>
+<p>Короткий ответ на самый частый вопрос. Полная таблица со временем и размерами — ниже.</p>
+<ul class="picker">
+  <li><b>Обычный белый хлеб</b><span><i>1</i>BASIC</span></li>
+  <li><b>Хрустящий французский</b><span><i>2</i>FRENCH</span></li>
+  <li><b>Цельнозерновой, с отрубями</b><span><i>3</i>WHOLE WHEAT</span></li>
+  <li><b>Сдоба, сладкий, с сухофруктами</b><span><i>5</i>SWEET</span></li>
+  <li><b>Надо очень быстро</b><span><i>6 · 7</i>ULTRA FAST</span></li>
+  <li><b>Тесто на пиццу и булочки, без выпечки</b><span><i>8</i>DOUGH</span></li>
+  <li><b>Варенье</b><span><i>9</i>JAM</span></li>
+  <li><b>Кекс на разрыхлителе</b><span><i>10</i>CAKE</span></li>
+  <li><b>Мягкий тостовый хлеб</b><span><i>11</i>SANDWICH</span></li>
+  <li><b>Только допечь</b><span><i>12</i>BAKE</span></li>
+  <li><b>Без глютена</b><span><i>13</i>GLUTEN FREE</span></li>
+  <li><b>Только замесить тесто</b><span><i>14</i>KNEAD</span></li>
+  <li><b>Йогурт</b><span><i>15</i>YOGURT</span></li>
+</ul>
+
+<h2>Все 15 программ</h2>
 <div class="table-wrap">
-  <table>
-    <thead><tr><th>№</th><th>Название</th><th>По-русски</th><th>Время</th><th>Размер</th><th>Сигнал добавок</th><th>Для чего</th></tr></thead>
+  <table class="tbl-stack tbl-sticky">
+    <thead><tr><th>Программа</th><th>По-русски</th><th>Время</th><th>Размер</th><th>Сигнал добавок</th><th>Для чего</th></tr></thead>
     <tbody>
       {% for p in programs %}
       <tr>
-        <td class="num"><strong>{{ p.n }}</strong></td>
-        <td class="num">{{ p.en }}</td>
-        <td>{{ p.ru }}</td>
-        <td class="num">{{ p.time }}</td>
-        <td class="num">{{ p.sizes }}</td>
-        <td class="num">{% if p.beep %}есть{% else %}—{% endif %}</td>
-        <td>{{ p.what }}</td>
+        <td data-l="Программа" class="num"><strong>{{ p.n }} {{ p.en }}</strong></td>
+        <td data-l="По-русски">{{ p.ru }}</td>
+        <td data-l="Время" class="num">{{ p.time }}</td>
+        <td data-l="Размер" class="num">{{ p.sizes }}</td>
+        <td data-l="Сигнал добавок" class="num">{% if p.beep %}есть{% else %}нет{% endif %}</td>
+        <td data-l="Для чего">{{ p.what }}</td>
       </tr>
       {% endfor %}
     </tbody>
@@ -45,7 +63,7 @@
 <code>13 Gluten Free</code>, <code>14 Knead</code> и <code>15 Yogurt</code> — и позволила
 <a href="{{ rel }}analog-judge-jea43/">опознать платформу печки</a>: у Judge JEA43 список совпадает целиком.</div></div>
 
-<h2>Какую программу выбирать</h2>
+<h2>Разбор программ по одной</h2>
 
 <h3>1 BASIC — основная</h3>
 <p>90 % выпечки делается здесь. Обычная пшеничная мука, дрожжи, вода — три часа от старта до готового хлеба.

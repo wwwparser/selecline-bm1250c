@@ -2,80 +2,87 @@
 {% import "ig.html" as ig %}
 {% block content %}
 
-<div class="hero">
-  <h1>Хлебопечка Selecline BM1250C: инструкция, 15 программ и рецепты</h1>
-  <p class="lead">Selecline — собственная марка сети <strong>Ашан (Auchan)</strong>, и полной инструкции с нормами
-    закладки к этой модели в интернете нет: в комплектной документации указан только порядок добавления продуктов.
-    Здесь она собрана заново — по книге рецептов печки на том же контроллере и по практике владельцев.</p>
-  <ul class="badges">
-    <li class="badge">15 программ</li>
-    <li class="badge">1.5 lb ≈ 680 г · 2.0 lb ≈ 900 г</li>
-    <li class="badge alt">Рецепты в граммах и миллилитрах</li>
-  </ul>
-</div>
+<section class="hero">
+  <div class="shell hero-in">
+    <div class="hero-txt">
+      <p class="kicker">Selecline · собственная марка сети Ашан (Auchan)</p>
+      <h1>Хлебопечка Selecline BM1250C: инструкция, 15 программ и рецепты</h1>
+      <p class="lead">Полной инструкции к этой модели в интернете нет — в комплектной документации есть только
+        порядок добавления продуктов. Здесь она собрана заново: по книге рецептов печки на том же контроллере
+        и по практике владельцев.</p>
+      <p class="hero-cta">
+        <a class="btn" href="#bystryj-start">Испечь первый хлеб</a>
+        <a class="btn btn-2" href="{{ rel }}instrukciya/">Открыть инструкцию</a>
+      </p>
+      <ul class="facts">
+        <li><b>15</b><span>программ</span></li>
+        <li><b>500 г → 275 мл</b><span>мука и вода</span></li>
+        <li><b>2.0 lb ≈ 900 г</b><span>большая буханка</span></li>
+      </ul>
+    </div>
+    <div class="hero-img">{{ ig.machine_svg() }}</div>
+  </div>
+</section>
 
-<div class="note" style="margin-top:26px">{{ ig.ico("check") }}<div><b>С чего начать.</b> Если печка только распакована — берите
-  <a href="{{ rel }}recepty/belyj-hleb/">базовый белый хлеб 500 г муки / 275 мл воды</a>, программа 1 BASIC, размер 2.0 lb.
-  Это родная для этой платформы рецептура, а не пересчёт с чужой печки.</div></div>
+<div class="shell prose">
 
-{{ ig.quick_start(main_recipe, rel) }}
+  {{ ig.start_sheet(main_recipe, rel) }}
 
-<h2>Порядок закладки продуктов</h2>
-<p>Порядок один для всех дрожжевых рецептов и нарушать его нельзя: дрожжи не должны раньше времени встретиться
-  с водой и солью. Особенно это критично при отложенном старте, когда закладка стоит в ведёрке несколько часов.</p>
-<figure>
+  <h2 id="zakladka">Порядок закладки продуктов</h2>
+  <p>Порядок один для всех дрожжевых рецептов, и нарушать его нельзя: дрожжи не должны раньше времени встретиться
+    с водой и солью. Особенно это критично при отложенном старте, когда закладка стоит в ведёрке несколько часов.</p>
   {{ ig.loading_svg() }}
-  <figcaption>Шесть шагов закладки: лопатка → вода → масло, соль, сахар → мука → ямка в муке → дрожжи в ямку</figcaption>
-</figure>
 
-<h2>Рецепты под программы этой печки</h2>
-<p>Все рецепты пересчитаны в граммы и миллилитры — без английских чашек и фунтов.</p>
-<div class="grid">
-  {% for o in recipes %}
-  <a class="rcard" href="{{ rel }}recepty/{{ o.slug }}/">
-    <span class="emoji">{{ o.emoji }}</span>
-    <b>{{ o.h1 }}</b>
-    <span>Программа {{ o.program.n }} {{ o.program.en }} · {{ o.program.time }} · {{ o.size }}</span>
-  </a>
-  {% endfor %}
-</div>
+  <h2 id="recepty">Рецепты под программы этой печки</h2>
+  <p>Всё пересчитано в граммы и миллилитры — без английских чашек и фунтов. Справа от каждого рецепта стоит
+    его главное соотношение: мука и вода.</p>
+  {{ ig.recipe_list(recipes, rel) }}
+  <p><a class="link-more" href="{{ rel }}recepty/">Все рецепты со сводной таблицей закладок {{ ig.ico("arrow") }}</a></p>
 
-<h2>Панель управления</h2>
-{{ ig.panel_svg(programs) }}
-<div class="table-wrap">
-  <table>
-    <thead><tr><th>Кнопка</th><th>Что делает</th></tr></thead>
-    <tbody>{% for b in buttons %}<tr><td class="num"><strong>{{ b.name }}</strong></td><td>{{ b.what }}</td></tr>{% endfor %}</tbody>
-  </table>
-</div>
-<p><a class="cta" href="{{ rel }}instrukciya/">Полная инструкция →</a></p>
+  <h2 id="panel">Панель управления</h2>
+  <p>Шесть кнопок и дисплей. Программа выбирается кнопкой MENU по кругу, а проверить, что выбрана нужная,
+    проще всего по времени на дисплее.</p>
+  {{ ig.panel_svg(programs) }}
+  <dl class="defs">
+    {% for b in buttons %}
+    <dt>{{ b.name }}</dt><dd>{{ b.what }}</dd>
+    {% endfor %}
+  </dl>
+  <p><a class="link-more" href="{{ rel }}instrukciya/">Полная инструкция: закладка, отложенный старт, ошибки, уход {{ ig.ico("arrow") }}</a></p>
 
-<h2>Откуда взялась инструкция</h2>
-<p>Selecline BM1250C — это OEM-печка: тот же аппарат продавался под несколькими марками. У модели
-  <strong>Judge JEA43</strong> совпадает всё: кнопки, размеры буханки и вся последовательность 15 программ
-  вплоть до редких <code>13 Gluten Free</code>, <code>14 Knead</code>, <code>15 Yogurt</code>. Для Judge сохранилась
-  полноценная инструкция с книгой рецептов на 25 страниц — она и стала основой этого сайта.</p>
-<p>Эта инструкция выложена здесь целиком: <a href="{{ rel }}manual/judge-jea43-instruction-manual-en.pdf">оригинальный
-английский PDF</a> и <a href="{{ rel }}manual-ru/">полный перевод на русский</a> — руководство и все 14 фирменных
-рецептов, включая пиццу, мармелад и йогурт.</p>
-<p><a class="cta" href="{{ rel }}manual-ru/">Читать перевод инструкции →</a>
-   <a class="cta" href="{{ rel }}analog-judge-jea43/" style="background:var(--surface-2);color:var(--ink-strong)">Как нашли аналог →</a></p>
+  <h2 id="otkuda">Откуда взялась инструкция</h2>
+  <p>Selecline BM1250C — это OEM-печка: тот же аппарат продавался под несколькими марками. У модели
+    <strong>Judge JEA43</strong> совпадает всё: кнопки, размеры буханки и вся последовательность 15 программ
+    вплоть до редких <code>13 Gluten Free</code>, <code>14 Knead</code>, <code>15 Yogurt</code>. Для Judge сохранилась
+    полноценная инструкция с книгой рецептов на 25 страниц — она и стала основой этого сайта.</p>
+  <p>Эта инструкция выложена здесь целиком: <a href="{{ rel }}manual/judge-jea43-instruction-manual-en.pdf">оригинальный
+    английский PDF</a> и <a href="{{ rel }}manual-ru/">полный перевод на русский</a> — руководство и все 14 фирменных
+    рецептов, включая пиццу, мармелад и йогурт.</p>
+  <p class="row-links">
+    <a class="btn btn-2" href="{{ rel }}manual-ru/">Читать перевод инструкции</a>
+    <a class="link-more" href="{{ rel }}analog-judge-jea43/">Как нашли аналог {{ ig.ico("arrow") }}</a>
+  </p>
 
-<h2>Это хлебопечка из Ашана</h2>
-<p><strong>Selecline</strong> — не завод, а собственная торговая марка сети <strong>Ашан (Auchan)</strong>. Технику
-под этим именем сеть заказывала у сторонних производителей, поэтому официальной поддержки и документации у марки нет,
-зато почти у каждой модели есть «близнец» под другим брендом — с нормальной инструкцией.</p>
-<p>Эту же печку ищут по разным написаниям: {% for a in machine.aka %}<b>{{ a }}</b>{% if not loop.last %}, {% endif %}{% endfor %}.
-Речь везде об одном и том же аппарате.</p>
-<p>Кроме BM1250C в Ашане продавалась более простая модель на 12 программ —
-<a href="{{ rel }}selecline-861382-bm1333/">Selecline 861382 / BM1333</a>. Рабочая закладка у них разная,
-поэтому сначала стоит определить свою модель.</p>
-<p><a class="cta" href="{{ rel }}hlebopechka-auchan/">Всё про хлебопечки Ашан →</a></p>
+  <h2 id="auchan">Это хлебопечка из Ашана</h2>
+  <p><strong>Selecline</strong> — не завод, а собственная торговая марка сети <strong>Ашан (Auchan)</strong>. Технику
+    под этим именем сеть заказывала у сторонних производителей, поэтому официальной поддержки и документации у марки нет,
+    зато почти у каждой модели есть «близнец» под другим брендом — с нормальной инструкцией.</p>
+  <p>Эту же печку ищут по разным написаниям: {% for a in machine.aka %}<b>{{ a }}</b>{% if not loop.last %}, {% endif %}{% endfor %}.
+    Речь везде об одном и том же аппарате.</p>
+  <p>Кроме BM1250C в Ашане продавалась более простая модель на 12 программ —
+    <a href="{{ rel }}selecline-861382-bm1333/">Selecline 861382 / BM1333</a>. Рабочая закладка у них разная,
+    поэтому сначала стоит определить свою модель.</p>
+  <p><a class="link-more" href="{{ rel }}hlebopechka-auchan/">Всё про хлебопечки Ашан {{ ig.ico("arrow") }}</a></p>
 
-<h2>Частые вопросы</h2>
-<div class="faq">
-  {% for q in faq %}
-  <details><summary>{{ q.q }}</summary><div>{{ q.a|safe }}</div></details>
-  {% endfor %}
+  <h2 id="faq">Частые вопросы</h2>
+  <div class="faq">
+    {% for q in faq %}
+    <details>
+      <summary>{{ q.q }}<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <div class="faq-a">{{ q.a|safe }}</div>
+    </details>
+    {% endfor %}
+  </div>
+
 </div>
 {% endblock %}

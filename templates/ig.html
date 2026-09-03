@@ -1,187 +1,254 @@
-{# ============ Инфографика: SVG-схемы и HTML-блоки ============ #}
+{# ============ Схемы, иллюстрации и повторно используемые блоки ============ #}
 
 {% macro ico(name) %}<span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-{{ name }}"/></svg></span>{% endmacro %}
 
 
-{# ---------- Панель управления Selecline BM1250C ---------- #}
+{# ---------- Техническая иллюстрация печки (для первого экрана) ---------- #}
+{% macro machine_svg() %}
+<svg class="machine" viewBox="0 0 300 250" role="img" aria-label="Хлебопечка Selecline BM1250C: корпус, крышка со смотровым окном и панель управления" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+    <!-- корпус -->
+    <path d="M40 74h220a10 10 0 0 1 10 10v134a10 10 0 0 1-10 10H40a10 10 0 0 1-10-10V84a10 10 0 0 1 10-10z" fill="var(--surface)"/>
+    <!-- крышка -->
+    <path d="M46 74V44a10 10 0 0 1 10-10h188a10 10 0 0 1 10 10v30" fill="var(--surface-2)"/>
+    <path d="M30 74h240" stroke-width="2.4"/>
+    <!-- ручка крышки -->
+    <path d="M128 34v-8a8 8 0 0 1 8-8h28a8 8 0 0 1 8 8v8" stroke-width="2.2"/>
+    <!-- смотровое окно -->
+    <rect x="110" y="46" width="80" height="22" rx="6" fill="var(--bg)"/>
+    <!-- панель: дисплей -->
+    <rect x="52" y="92" width="90" height="46" rx="6" fill="#1b2418" stroke="none"/>
+    <!-- вентиляционные прорези -->
+    <path d="M232 96v34M244 96v34M256 96v34" stroke-width="2" opacity=".35"/>
+    <!-- кнопки -->
+    <g stroke-width="1.9">
+      <rect x="52" y="152" width="40" height="20" rx="7"/>
+      <rect x="100" y="152" width="40" height="20" rx="7"/>
+      <rect x="148" y="152" width="40" height="20" rx="7"/>
+      <rect x="196" y="152" width="40" height="20" rx="7"/>
+      <rect x="52" y="184" width="56" height="24" rx="9" fill="var(--green)" stroke="var(--green)"/>
+    </g>
+    <!-- ножки -->
+    <path d="M60 228v8M240 228v8"/>
+  </g>
+  <g font-size="15" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9ede86">
+    <text x="97" y="122" text-anchor="middle">3:00</text>
+  </g>
+  <circle cx="216" cy="196" r="5" fill="var(--red)"/>
+</svg>
+{% endmacro %}
+
+
+{# ---------- Панель управления ---------- #}
 {% macro panel_svg(programs, title="Панель управления Selecline BM1250C") %}
-<svg class="diagram" viewBox="0 0 700 310" role="img" aria-label="{{ title }}: дисплей 3:00, кнопки Time+, Time-, Menu, Loaf size, Colour, Start/Stop и список 15 программ" xmlns="http://www.w3.org/2000/svg">
-  <rect x="6" y="6" width="688" height="298" rx="26" fill="var(--surface-2)" stroke="var(--line)" stroke-width="2"/>
-  <g font-family="inherit" font-size="13" fill="var(--ink)">
+{% set buttons = [
+  ("TIME +", "отложить старт", false),
+  ("TIME −", "убавить время", false),
+  ("MENU", "программа 1–15", false),
+  ("LOAF SIZE", "1.5 lb / 2.0 lb", false),
+  ("COLOUR", "цвет корочки", false),
+  ("START / STOP", "стоп — держать 3 с", true)
+] %}
+<svg class="panel" viewBox="0 0 720 344" role="img" aria-label="{{ title }}: список 15 программ, дисплей со временем 3:00 и кнопки TIME +, TIME −, MENU, LOAF SIZE, COLOUR, START/STOP" xmlns="http://www.w3.org/2000/svg">
+  <rect x="14" y="14" width="692" height="312" rx="14" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>
+  <rect x="14" y="14" width="692" height="312" rx="14" fill="none" stroke="var(--ink)" stroke-width="1" opacity=".14"/>
+
+  <circle cx="46" cy="42" r="5" fill="var(--red)"/>
+  <text x="60" y="46" font-size="11.5" letter-spacing=".08em" fill="var(--muted)">SELECLINE BM1250C</text>
+
+  <!-- печатный список программ -->
+  <g font-size="13" fill="var(--ink)">
     {% for col in [programs[0:5], programs[5:10], programs[10:15]] %}
-      {% set cx = 34 + loop.index0 * 152 %}
+      {% set cx = 46 + loop.index0 * 140 %}
       {% for p in col %}
-      <text x="{{ cx }}" y="{{ 44 + loop.index0 * 21 }}"><tspan font-weight="700" fill="var(--green-ink)">{{ p.n }}</tspan> {{ p.en }}</text>
+      <text x="{{ cx }}" y="{{ 76 + loop.index0 * 21 }}"><tspan font-weight="700" fill="var(--green-ink)">{{ "%02d"|format(p.n) }}</tspan>  {{ p.en }}</text>
       {% endfor %}
     {% endfor %}
   </g>
 
   <!-- дисплей -->
-  <rect x="494" y="28" width="176" height="104" rx="12" fill="#1d2a1b" stroke="var(--line)" stroke-width="2"/>
-  <g font-family="ui-monospace, monospace" fill="#9ede86">
-    <text x="506" y="48" font-size="11" letter-spacing=".5">Light  Medium  Dark</text>
-    <text x="582" y="94" font-size="46" font-weight="700" text-anchor="middle" letter-spacing="1">3:00</text>
-    <text x="506" y="120" font-size="11" letter-spacing=".5">2.0 lb        1.5 lb</text>
+  <rect x="466" y="52" width="208" height="112" rx="10" fill="#1b2418"/>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9ede86">
+    <text x="482" y="74" font-size="11" letter-spacing=".06em" opacity=".85">LIGHT · MEDIUM · DARK</text>
+    <text x="570" y="126" font-size="44" font-weight="700" text-anchor="middle" letter-spacing=".02em">3:00</text>
+    <text x="482" y="150" font-size="11" letter-spacing=".06em" opacity=".85">2.0 lb</text>
+    <text x="658" y="150" font-size="11" letter-spacing=".06em" text-anchor="end" opacity=".85">1.5 lb</text>
   </g>
 
-  <!-- кнопки -->
-  <g>
-    {% for b in [("Time +", 34), ("Time −", 160), ("Menu", 286), ("Loaf size", 412), ("Colour", 538)] %}
-    <rect x="{{ b[1] }}" y="172" width="112" height="42" rx="21" fill="var(--surface)" stroke="var(--green)" stroke-width="2"/>
-    <text x="{{ b[1] + 56 }}" y="199" text-anchor="middle" font-size="14.5" font-weight="600" fill="var(--ink-strong)">{{ b[0] }}</text>
-    {% endfor %}
-    <rect x="270" y="238" width="160" height="48" rx="24" fill="var(--green)"/>
-    <text x="350" y="268" text-anchor="middle" font-size="15.5" font-weight="700" fill="#ffffff">START / STOP</text>
-    <circle cx="466" cy="262" r="7" fill="var(--red)"/>
-    <text x="482" y="267" font-size="12.5" fill="var(--muted)">индикатор работы</text>
-  </g>
-</svg>
-{% endmacro %}
-
-
-{# ---------- Порядок закладки: 6 ведёрок ---------- #}
-{% macro pan_shape(x, y, w, h) %}<path d="M{{ x }} {{ y }} L{{ x + w }} {{ y }} L{{ x + w - 9 }} {{ y + h - 10 }} Q{{ x + w - 9 }} {{ y + h }} {{ x + w - 19 }} {{ y + h }} L{{ x + 19 }} {{ y + h }} Q{{ x + 9 }} {{ y + h }} {{ x + 9 }} {{ y + h - 10 }} Z" fill="var(--surface)" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/>{% endmacro %}
-
-{% macro loading_svg() %}
-{% set steps = [
-  ("Установите лопатку", "paddle"),
-  ("Влейте воду", "water"),
-  ("Масло, соль, сахар", "extras"),
-  ("Засыпьте муку", "flour"),
-  ("Сделайте ямку", "well"),
-  ("В ямку — дрожжи", "yeast")
-] %}
-<svg class="diagram" viewBox="0 0 720 300" role="img" aria-label="Порядок закладки продуктов в ведёрко: лопатка, вода, масло с солью и сахаром, мука, ямка в муке, дрожжи в ямку" xmlns="http://www.w3.org/2000/svg">
-  {% for s in steps %}
-    {% set col = loop.index0 % 3 %}
-    {% set row = loop.index0 // 3 %}
-    {% set x = 20 + col * 235 %}
-    {% set y = 24 + row * 148 %}
-    <circle cx="{{ x + 13 }}" cy="{{ y + 12 }}" r="13" fill="var(--green)"/>
-    <text x="{{ x + 13 }}" y="{{ y + 17 }}" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">{{ loop.index }}</text>
-    <text x="{{ x + 34 }}" y="{{ y + 17 }}" font-size="14" font-weight="600" fill="var(--ink-strong)">{{ s[0] }}</text>
-
-    {{ pan_shape(x + 46, y + 34, 110, 82) }}
-    <!-- вал и лопатка -->
-    <path d="M{{ x + 101 }} {{ y + 116 }} v-16" stroke="var(--muted)" stroke-width="3"/>
-    <path d="M{{ x + 92 }} {{ y + 100 }} l9 -13 l9 13 z" fill="var(--muted)"/>
-
-    {% if s[1] in ["water", "extras", "flour", "well", "yeast"] %}
-      <path d="M{{ x + 56 }} {{ y + 96 }} h90 l-3 12 q0 8 -10 8 h-64 q-10 0 -10 -8 z" fill="#8fc3e8" opacity=".75"/>
-    {% endif %}
-    {% if s[1] in ["extras", "flour", "well", "yeast"] %}
-      <path d="M{{ x + 57 }} {{ y + 90 }} h88" stroke="var(--amber)" stroke-width="5" stroke-linecap="round" opacity=".85"/>
-    {% endif %}
-    {% if s[1] == "flour" %}
-      <path d="M{{ x + 54 }} {{ y + 86 }} q46 -34 92 0 z" fill="#e8d5b0"/>
-    {% endif %}
-    {% if s[1] in ["well", "yeast"] %}
-      <path d="M{{ x + 54 }} {{ y + 86 }} q22 -18 41 -22 q-9 10 6 12 q15 2 6 -12 q22 5 39 22 z" fill="#e8d5b0"/>
-      <ellipse cx="{{ x + 101 }}" cy="{{ y + 66 }}" rx="12" ry="5" fill="var(--surface-2)" stroke="#d8c299"/>
-    {% endif %}
-    {% if s[1] == "yeast" %}
-      {% for d in [(-6, 1), (0, -1), (6, 1), (-3, 3), (3, 3)] %}
-      <circle cx="{{ x + 101 + d[0] }}" cy="{{ y + 66 + d[1] }}" r="2.4" fill="var(--amber)"/>
-      {% endfor %}
-    {% endif %}
+  <!-- кнопки с подписями -->
+  {% for b in buttons %}
+    {% set bx = 30 + loop.index0 * 111 %}
+    <rect x="{{ bx }}" y="200" width="99" height="42" rx="8"
+          fill="{{ 'var(--green)' if b[2] else 'var(--surface-2)' }}"
+          stroke="{{ 'var(--green)' if b[2] else 'var(--line)' }}" stroke-width="1.6"/>
+    <text x="{{ bx + 49 }}" y="226" text-anchor="middle" font-size="{{ 12 if b[2] else 13 }}" font-weight="700"
+          letter-spacing=".02em" fill="{{ 'var(--on-green)' if b[2] else 'var(--ink-strong)' }}">{{ b[0] }}</text>
+    <path d="M{{ bx + 49 }} 252v14" stroke="var(--line)" stroke-width="1.4"/>
+    <text x="{{ bx + 49 }}" y="286" text-anchor="middle" font-size="12" fill="var(--muted)">{{ b[1] }}</text>
   {% endfor %}
 </svg>
 {% endmacro %}
 
 
-{# ---------- Три состояния колобка ---------- #}
-{% macro dough_svg(state) %}
-<svg viewBox="0 0 200 140" role="img" aria-label="Состояние колобка: {{ state }}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
-  {{ pan_shape(30, 20, 140, 100) }}
-  {% if state == "dry" %}
-    <path d="M78 112 q-8 -26 10 -36 q14 -8 26 2 q14 10 6 34 z" fill="#e8d5b0" stroke="#c9ae82" stroke-width="1.5"/>
-    <path d="M92 84 l6 -8 l5 7" stroke="#c9ae82" stroke-width="1.5" fill="none"/>
-    {% for d in [(46, 108), (52, 100), (44, 96), (152, 108), (146, 100), (154, 96), (58, 112), (142, 112)] %}
-    <circle cx="{{ d[0] }}" cy="{{ d[1] }}" r="2.6" fill="#d9c49b"/>
+{# ---------- Порядок закладки: горизонтальная последовательность ---------- #}
+{% macro pan_shape(x, y, w, h) %}<path d="M{{ x }} {{ y }} L{{ x + w }} {{ y }} L{{ x + w - 9 }} {{ y + h - 10 }} Q{{ x + w - 9 }} {{ y + h }} {{ x + w - 19 }} {{ y + h }} L{{ x + 19 }} {{ y + h }} Q{{ x + 9 }} {{ y + h }} {{ x + 9 }} {{ y + h - 10 }} Z" fill="var(--surface)" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/>{% endmacro %}
+
+{% macro pan_step(kind) %}
+<svg class="seq-pan" viewBox="0 0 120 96" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  {{ pan_shape(10, 8, 100, 78) }}
+  <path d="M60 86V64" stroke="var(--muted)" stroke-width="3"/>
+  <path d="M51 66l9-13 9 13z" fill="var(--muted)"/>
+  {% if kind != "paddle" %}
+  <path d="M20 62h80l-3 14q0 8-10 8H33q-10 0-10-8z" fill="var(--water)"/>
+  {% endif %}
+  {% if kind in ["extras", "flour", "well", "yeast"] %}
+  <path d="M21 56h78" stroke="var(--amber)" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+  {% endif %}
+  {% if kind == "flour" %}
+  <path d="M18 54q42-40 84 0z" fill="var(--dough)"/>
+  {% endif %}
+  {% if kind in ["well", "yeast"] %}
+  <path d="M18 54q20-22 37-26-8 11 5 13 14 2 5-13 20 6 35 26z" fill="var(--dough)"/>
+  <ellipse cx="60" cy="29" rx="12" ry="5" fill="var(--surface)" stroke="var(--dough-line)" stroke-width="1.4"/>
+  {% endif %}
+  {% if kind == "yeast" %}
+    {% for d in [(-6, 1), (0, -1), (6, 1), (-3, 3), (3, 3)] %}
+    <circle cx="{{ 60 + d[0] }}" cy="{{ 29 + d[1] }}" r="2.4" fill="var(--amber)"/>
     {% endfor %}
-  {% elif state == "ok" %}
-    <ellipse cx="100" cy="90" rx="42" ry="28" fill="#eddcbb" stroke="#c9ae82" stroke-width="1.5"/>
-    <path d="M78 80 q14 -10 30 -3" stroke="#f6ecd8" stroke-width="4" fill="none" stroke-linecap="round"/>
-  {% else %}
-    <path d="M44 116 q-2 -18 26 -22 q30 -4 60 0 q28 4 26 22 z" fill="#f0e2c6" stroke="#c9ae82" stroke-width="1.5"/>
-    <path d="M58 104 q18 -6 40 -4" stroke="#f8f0de" stroke-width="4" fill="none" stroke-linecap="round"/>
   {% endif %}
 </svg>
 {% endmacro %}
 
+{% macro loading_svg() %}
+{% set steps = [
+  ("Вода", "20–25 °C", "water"),
+  ("Масло, соль, сахар", "поверх воды", "extras"),
+  ("Мука", "закрывает всю жидкость", "flour"),
+  ("Ямка в муке", "не доставая до воды", "well"),
+  ("Дрожжи", "сухие, в ямку", "yeast")
+] %}
+<div class="seq">
+  <p class="seq-pre">{{ pan_step("paddle") }}<span><b>Сначала — лопатка.</b> Насадите её на вал ведёрка. Без лопатки печка отработает всю программу впустую.</span></p>
+  <ol class="seq-list">
+    {% for s in steps %}
+    <li>
+      <span class="seq-n">{{ loop.index }}</span>
+      {{ pan_step(s[2]) }}
+      <span class="seq-t">{{ s[0] }}<em>{{ s[1] }}</em></span>
+    </li>
+    {% endfor %}
+  </ol>
+</div>
+{% endmacro %}
 
-{# ---------- Инфографика «быстрый старт» ---------- #}
-{% macro quick_start(r, rel) %}
-<section class="ig" aria-label="Инфографика: как испечь белый хлеб в Selecline BM1250C">
-  <p class="ig-title">Как испечь белый хлеб в хлебопечке Selecline BM1250C</p>
-  <p class="ig-sub">Вся закладка, настройки панели и контрольные точки на одной карточке</p>
-  <p class="ig-ribbon">Программа {{ r.program.n }} {{ r.program.en }} &nbsp;•&nbsp; Размер {{ r.size }} &nbsp;•&nbsp; Корочка {{ r.crust }} &nbsp;•&nbsp; {{ r.program.time }}</p>
 
-  <div class="ig-cols">
-    <div class="ig-box">
-      <p class="ig-h"><span class="ig-n">1</span> Ингредиенты</p>
-      <ul class="ing-list">
+{# ---------- Три состояния колобка ---------- #}
+{% macro dough_svg(state) %}
+<svg class="dough" viewBox="0 0 200 132" role="img" aria-label="{% if state == 'dry' %}Сухое тесто: рваный комок и мука в углах ведёрка{% elif state == 'ok' %}Нормальное тесто: гладкий шар, стенки ведёрка чистые{% else %}Слишком жидкое тесто: расплывшаяся лепёшка по дну{% endif %}" xmlns="http://www.w3.org/2000/svg">
+  {{ pan_shape(24, 14, 152, 104) }}
+  <path d="M100 118V92" stroke="var(--muted)" stroke-width="3"/>
+  <path d="M89 94l11-16 11 16z" fill="var(--muted)"/>
+  {% if state == "dry" %}
+    <path d="M72 113q-11-31 12-43 17-10 32 2 17 12 7 41z" fill="var(--dough)" stroke="var(--dough-line)" stroke-width="1.6"/>
+    <path d="M92 84l7-9 6 8M104 96l6-7" stroke="var(--dough-line)" stroke-width="1.5" fill="none"/>
+    {% for d in [(40, 110), (47, 101), (38, 95), (160, 110), (153, 101), (162, 95), (54, 113), (146, 113)] %}
+    <circle cx="{{ d[0] }}" cy="{{ d[1] }}" r="2.8" fill="var(--dough-line)" opacity=".75"/>
+    {% endfor %}
+  {% elif state == "ok" %}
+    <ellipse cx="100" cy="83" rx="48" ry="34" fill="var(--dough)" stroke="var(--dough-line)" stroke-width="1.6"/>
+    <path d="M74 71q16-12 34-3" stroke="var(--dough-hi)" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+  {% else %}
+    <path d="M38 114q-2-19 27-23 33-4 66 0 29 4 27 23z" fill="var(--dough)" stroke="var(--dough-line)" stroke-width="1.6"/>
+    <path d="M54 102q19-7 42-5" stroke="var(--dough-hi)" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <path d="M35 100q4 8 3 14M165 100q-4 8-3 14" stroke="var(--dough-line)" stroke-width="1.6" fill="none" opacity=".8"/>
+  {% endif %}
+</svg>
+{% endmacro %}
+
+{% macro dough_states(rel=None, compact=false) %}
+{% set states = [
+  ("dry", "Сухое", "Комок рваный, по углам ведёрка остаётся мука", "Долейте 1 ст. л. воды и дайте промесить полминуты"),
+  ("ok", "Норма", "Мягкий гладкий шар, стенки ведёрка чистые", "Ничего не делайте — закройте крышку"),
+  ("wet", "Жидкое", "Тесто растекается по дну и липнет к стенкам", "Досыпьте 1 ст. л. муки и дайте промесить полминуты")
+] %}
+<div class="dough3{% if compact %} dough3-c{% endif %}">
+  {% for s in states %}
+  <figure class="d-{{ s[0] }}">
+    {{ dough_svg(s[0]) }}
+    <figcaption>
+      <b>{{ s[1] }}</b>
+      <span class="d-sign">{{ s[2] }}</span>
+      <span class="d-act">{{ s[3] }}</span>
+    </figcaption>
+  </figure>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+
+{# ---------- Каталог рецептов списком ---------- #}
+{% macro recipe_list(items, rel) %}
+<ul class="rlist">
+  {% for o in items %}
+  {% set flour = o.ingredients | selectattr("icon", "equalto", "flour") | map(attribute="qty") | join(" + ") %}
+  {% set water = o.ingredients | selectattr("icon", "equalto", "water") | map(attribute="qty") | join(" ") %}
+  <li>
+    <a href="{{ rel }}recepty/{{ o.slug }}/">
+      <span class="rl-main">
+        <span class="rl-t">{{ o.h1 }}</span>
+        <span class="rl-m"><b>{{ o.program.n }} {{ o.program.en }}</b> · {{ o.program.time }} · {{ o.size }}</span>
+      </span>
+      {% if flour and water %}<span class="rl-r">{{ flour }} <i>/</i> {{ water }}</span>{% endif %}
+      <svg class="rl-a" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg>
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% endmacro %}
+
+
+{# ---------- Лист «быстрый старт» ---------- #}
+{% macro start_sheet(r, rel) %}
+<section class="sheet" id="bystryj-start" aria-labelledby="sheet-h">
+  <div class="sheet-hd">
+    <p class="kicker">Быстрый старт</p>
+    <h2 id="sheet-h">Белый хлеб с первого раза</h2>
+    <p class="sheet-sub">Программа <b>{{ r.program.n }} {{ r.program.en }}</b> · <b>{{ r.size.split('(')[0]|trim }}</b> ·
+      корочка <b>{{ r.crust.split('—')[0]|trim }}</b> · <b>{{ r.program.time }}</b> на дисплее</p>
+  </div>
+
+  <div class="sheet-grid">
+    <section class="sheet-col">
+      <h3><span class="sheet-n">1</span> Что положить</h3>
+      <dl class="qty">
         {% for i in r.ingredients %}
-        <li>{{ ico(i.icon) }}<span class="nm">{{ i.name }}</span><span class="qty">{{ i.qty }}{% if i.alt %}<span class="alt">{{ i.alt }}</span>{% endif %}</span></li>
+        <dt>{{ i.qty }}</dt><dd>{{ i.name }}{% if i.alt %} <span>{{ i.alt }}</span>{% endif %}</dd>
         {% endfor %}
-      </ul>
-      <div class="note" style="margin:14px 0 0">{{ ico("wheat") }} Если есть весы и мерный стакан — меряйте ими. Ложками мука меряется с разбросом до 10 %.</div>
-    </div>
+      </dl>
+      <p class="sheet-fine">В том же порядке, сверху вниз: дрожжи не должны касаться воды и соли.</p>
+    </section>
 
-    <div class="ig-box">
-      <p class="ig-h"><span class="ig-n">2</span> Порядок закладки</p>
-      <ol class="steps">
-        <li>Установите лопатку в ведёрко</li>
-        <li>Влейте воду</li>
-        <li>Добавьте масло, соль и сахар</li>
-        <li>Засыпьте сверху всю муку</li>
-        <li>Сделайте в муке небольшую ямку</li>
-        <li>Всыпьте в ямку дрожжи</li>
-      </ol>
-      <div class="warn" style="margin:14px 0 0">{{ ico("warn") }} <b>Дрожжи не должны касаться воды и соли</b> при закладке — особенно если используете отложенный старт.</div>
-    </div>
+    <section class="sheet-col">
+      <h3><span class="sheet-n">2</span> Что выбрать на печке</h3>
+      <dl class="ctrl">
+        <dt>MENU</dt><dd>{{ r.program.n }} {{ r.program.en }}</dd>
+        <dt>LOAF SIZE</dt><dd>{{ r.size }}</dd>
+        <dt>COLOUR</dt><dd>{{ r.crust }}</dd>
+        <dt>START</dt><dd>на дисплее {{ r.program.time }}</dd>
+      </dl>
+      <p class="sheet-fine">Если на дисплее другое время — выбрана не та программа. Проверять удобнее всего именно по нему.</p>
+    </section>
+
+    <section class="sheet-col sheet-col-full">
+      <h3><span class="sheet-n">3</span> Что проверить через 10–15 минут</h3>
+      {{ dough_states(rel, compact=true) }}
+    </section>
   </div>
 
-  <div class="ig-cols" style="margin-top:18px">
-    <div class="ig-box">
-      <p class="ig-h"><span class="ig-n">3</span> Настройки на панели</p>
-      <ul class="ing-list">
-        <li>{{ ico("menu") }}<span class="nm">MENU</span><span class="qty">{{ r.program.n }} {{ r.program.en }}</span></li>
-        <li>{{ ico("loaf") }}<span class="nm">LOAF SIZE</span><span class="qty">{{ r.size }}</span></li>
-        <li>{{ ico("crust") }}<span class="nm">COLOUR</span><span class="qty">{{ r.crust }}</span></li>
-        <li>{{ ico("play") }}<span class="nm">Нажмите START</span><span class="qty">{{ r.program.time }}</span></li>
-      </ul>
-    </div>
-
-    <div class="ig-box">
-      <p class="ig-h"><span class="ig-n">4</span> Во время замеса</p>
-      <ul class="check">
-        <li>{{ ico("clock") }}<span>Через <b>10–15 минут</b> откройте крышку и посмотрите на колобок</span></li>
-        <li>{{ ico("check") }}<span>Норма: мягкий, гладкий, собранный в шар</span></li>
-        <li>{{ ico("drop") }}<span>Тесто сухое, по углам мука — добавьте <b>1 ст. л. воды</b></span></li>
-        <li>{{ ico("wheat") }}<span>Тесто растекается — добавьте <b>1 ст. л. муки</b></span></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="ig-cols" style="margin-top:18px">
-    <div class="ig-box">
-      <p class="ig-h"><span class="ig-n">5</span> После выпечки</p>
-      <ul class="check">
-        <li>{{ ico("mitt") }}<span>Доставайте ведёрко только прихватками</span></li>
-        <li>{{ ico("clock") }}<span>Остудите хлеб <b>30–60 минут</b> на решётке и только потом режьте</span></li>
-        <li>{{ ico("bell") }}<span>Печка держит хлеб тёплым ещё около часа, но корочка при этом размягчается</span></li>
-      </ul>
-    </div>
-    <div class="ig-box">
-      <p class="ig-h"><span class="ig-n">6</span> Добавки</p>
-      <ul class="check">
-        <li>{{ ico("spice") }}<span>Сухие молотые специи — сразу в муку, 1–2 ч. л. на 500 г</span></li>
-        <li>{{ ico("bell") }}<span>Семечки, орехи, сухофрукты, сыр — <b>по звуковому сигналу</b> в середине замеса</span></li>
-      </ul>
-    </div>
-  </div>
-
-  <p class="ig-foot">{{ ico("bulb") }} <span>Специи, семечки и добавки лучше класть по звуковому сигналу хлебопечки — иначе лопатка разотрёт их в замесе.</span></p>
+  <p class="sheet-foot">
+    {{ ico("bulb") }}
+    <span>Самая частая ошибка — лишняя вода. Доливайте и досыпайте по одной ложке, а не по 30–50 мл:
+      тесто легко перескакивает в противоположную крайность. Подробно — <a href="{{ rel }}kolobok/">про колобок</a>.</span>
+  </p>
 </section>
 {% endmacro %}

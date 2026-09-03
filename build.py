@@ -27,6 +27,56 @@ OUT = ROOT / "docs"
 
 FRONT_MATTER = re.compile(r"^<!--json\s*(\{.*?\})\s*-->\s*", re.DOTALL)
 
+H2 = re.compile(r"<h2(?P<attrs>[^>]*)>(?P<inner>.*?)</h2>", re.DOTALL | re.IGNORECASE)
+HAS_ID = re.compile(r"\sid\s*=", re.IGNORECASE)
+TAGS = re.compile(r"<[^>]+>")
+
+TRANSLIT = {
+    "а": "a", "б": "b", "в": "v", "г": "g", "д": "d", "е": "e", "ё": "e", "ж": "zh",
+    "з": "z", "и": "i", "й": "j", "к": "k", "л": "l", "м": "m", "н": "n", "о": "o",
+    "п": "p", "р": "r", "с": "s", "т": "t", "у": "u", "ф": "f", "х": "h", "ц": "c",
+    "ч": "ch", "ш": "sh", "щ": "sch", "ъ": "", "ы": "y", "ь": "", "э": "e",
+    "ю": "yu", "я": "ya",
+}
+
+
+def slugify(text: str) -> str:
+    out = []
+    for ch in text.lower():
+        if ch in TRANSLIT:
+            out.append(TRANSLIT[ch])
+        elif ch.isalnum() and ch.isascii():
+            out.append(ch)
+        else:
+            out.append("-")
+    return re.sub(r"-{2,}", "-", "".join(out)).strip("-")[:60] or "razdel"
+
+
+def add_anchors(body: str) -> tuple[str, list[dict]]:
+    """Проставляет id всем h2 без него и собирает локальное оглавление страницы."""
+    toc: list[dict] = []
+    used: set[str] = set()
+
+    def repl(m: re.Match) -> str:
+        attrs, inner = m.group("attrs"), m.group("inner")
+        title = re.sub(r"\s+", " ", TAGS.sub("", inner)).strip()
+        found = re.search(r'\sid\s*=\s*"([^"]+)"', attrs)
+        if found:
+            anchor = found.group(1)
+            tag = m.group(0)
+        else:
+            anchor = slugify(title)
+            n = 2
+            while anchor in used:
+                anchor = f"{slugify(title)}-{n}"
+                n += 1
+            tag = f'<h2 id="{anchor}"{attrs}>{inner}</h2>'
+        used.add(anchor)
+        toc.append({"id": anchor, "title": title})
+        return tag
+
+    return H2.sub(repl, body), toc
+
 
 def load_json(name: str):
     return json.loads((DATA / name).read_text(encoding="utf-8"))
@@ -212,6 +262,10 @@ def build(serve: bool = False) -> None:
         rel = rel_for(url)
 
         body = env.from_string(body_src).render(**base_ctx, rel=rel, url=url)
+        body, toc = add_anchors(body)
+        # оглавление показываем только на длинных страницах и только там, где его нет в тексте
+        if not meta.get("toc", True) or len(toc) < 4:
+            toc = []
         crumbs = [{"url": "", "title": "Главная"}, {"url": url, "title": meta["h1"]}]
 
         blocks = [breadcrumb_ld(site, crumbs)]
@@ -232,7 +286,7 @@ def build(serve: bool = False) -> None:
         html = env.get_template("page.html").render(
             **base_ctx,
             url=url, rel=rel, breadcrumbs=crumbs,
-            h1=meta["h1"], lead=meta.get("lead"), body=body,
+            h1=meta["h1"], lead=meta.get("lead"), body=body, toc=toc,
             page_title=meta["title"], page_description=meta["description"],
             keywords=meta.get("keywords"), jsonld=blocks,
         )

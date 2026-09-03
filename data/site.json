@@ -4,14 +4,11 @@
   "site_url": "https://wwwparser.github.io/selecline-bm1250c",
   "author": "Владелец Selecline BM1250C",
   "lang": "ru",
-  "nav": [
+  "nav_primary": [
     {
-      "url": "instrukciya/",
-      "title": "Инструкция"
-    },
-    {
-      "url": "manual-ru/",
-      "title": "Оригинал"
+      "url": "",
+      "anchor": "#bystryj-start",
+      "title": "Быстрый старт"
     },
     {
       "url": "programmy/",
@@ -22,20 +19,38 @@
       "title": "Рецепты"
     },
     {
+      "url": "instrukciya/",
+      "title": "Инструкция"
+    }
+  ],
+  "nav_more": [
+    {
+      "url": "manual-ru/",
+      "title": "Перевод оригинальной инструкции"
+    },
+    {
       "url": "kolobok/",
-      "title": "Колобок"
+      "title": "Колобок: сухое и жидкое тесто"
     },
     {
       "url": "mery/",
-      "title": "Меры"
+      "title": "Меры: граммы и ложки"
+    },
+    {
+      "url": "specii/",
+      "title": "Специи и добавки"
     },
     {
       "url": "hlebopechka-auchan/",
-      "title": "Печки Ашан"
+      "title": "Хлебопечки Ашан"
     },
     {
       "url": "analog-judge-jea43/",
-      "title": "Аналог"
+      "title": "Аналог Judge JEA43"
+    },
+    {
+      "url": "selecline-861382-bm1333/",
+      "title": "Модель 861382 / BM1333"
     }
   ],
   "brand": "Selecline",

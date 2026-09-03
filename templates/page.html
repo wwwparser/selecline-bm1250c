@@ -1,9 +1,31 @@
 {% extends "base.html" %}
 {% import "ig.html" as ig %}
 {% block content %}
-<article>
-  <h1>{{ h1 }}</h1>
-  {% if lead %}<p class="lead">{{ lead }}</p>{% endif %}
-  {{ body|safe }}
-</article>
+<div class="shell{% if toc %} with-toc{% endif %}">
+  <div class="prose page-hd">
+    {% include "crumbs.html" %}
+    <h1>{{ h1 }}</h1>
+    {% if lead %}<p class="lead">{{ lead }}</p>{% endif %}
+  </div>
+</div>
+
+<div class="shell{% if toc %} with-toc{% endif %}">
+  <article class="prose">
+    {{ body|safe }}
+  </article>
+
+  {% if toc %}
+  <aside class="toc">
+    <details class="toc-box" id="tocBox">
+      <summary><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-list"/></svg>На этой странице<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <nav aria-label="Разделы страницы">
+        <ol>
+          {% for t in toc %}<li><a href="#{{ t.id }}">{{ t.title }}</a></li>{% endfor %}
+        </ol>
+      </nav>
+    </details>
+  </aside>
+  <script>try{if(matchMedia('(min-width:1080px)').matches)document.getElementById('tocBox').open=true}catch(e){}</script>
+  {% endif %}
+</div>
 {% endblock %}

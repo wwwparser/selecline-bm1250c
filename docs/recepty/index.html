@@ -13,8 +13,13 @@
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Selecline BM1250C — хлебопечка Ашан — инструкция, программы и рецепты">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#f7f3ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14120f" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="../style.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🍞</text></svg>">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <script>try{var t=localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://wwwparser.github.io/selecline-bm1250c/"}, {"@type": "ListItem", "position": 2, "name": "Рецепты", "item": "https://wwwparser.github.io/selecline-bm1250c/recepty/"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Белый хлеб — базовый рецепт", "url": "https://wwwparser.github.io/selecline-bm1250c/recepty/belyj-hleb/"}, {"@type": "ListItem", "position": 2, "name": "Французский хлеб", "url": "https://wwwparser.github.io/selecline-bm1250c/recepty/francuzskij-hleb/"}, {"@type": "ListItem", "position": 3, "name": "Цельнозерновой хлеб", "url": "https://wwwparser.github.io/selecline-bm1250c/recepty/celnozernovoj-hleb/"}, {"@type": "ListItem", "position": 4, "name": "Сладкий хлеб с сухофруктами", "url": "https://wwwparser.github.io/selecline-bm1250c/recepty/sladkij-hleb-s-suhofruktami/"}, {"@type": "ListItem", "position": 5, "name": "Сэндвичный хлеб", "url": "https://wwwparser.github.io/selecline-bm1250c/recepty/sandvichnyj-hleb/"}, {"@type": "ListItem", "position": 6, "name": "Ароматный хлеб с чесноком и травами", "url": "https://wwwparser.github.io/selecline-bm1250c/recepty/aromatnyj-hleb-s-travami/"}, {"@type": "ListItem", "position": 7, "name": "Белый хлеб — влажный вариант (500 / 330)", "url": "https://wwwparser.github.io/selecline-bm1250c/recepty/belyj-hleb-variant-panasonic/"}]}</script>
@@ -90,150 +95,286 @@
   <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
     <path d="M6 16V10a6 6 0 0 1 12 0v6l1.5 2.5h-15z"/><path d="M10 21h4"/>
   </symbol>
-</svg>
-<header class="site-header">
-  <div class="wrap">
-    <a class="brand" href="../">🍞 <span>Selecline BM1250C<small>инструкция и рецепты</small></span></a>
-    <nav class="site-nav" aria-label="Основная навигация">
-      <a href="../instrukciya/">Инструкция</a>
-      <a href="../manual-ru/">Оригинал</a>
+  <symbol id="i-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 20h16"/><path d="M12 20V7"/><circle cx="12" cy="5" r="2"/><path d="M6 7h12"/>
+    <path d="M6 7 3 14h6zM18 7l-3 7h6z"/>
+  </symbol>
+  <symbol id="i-thermo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><path d="M12 9v6"/>
+  </symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H19v16H5.5A1.5 1.5 0 0 0 4 20.5z"/><path d="M4 19.5A1.5 1.5 0 0 1 5.5 18H19"/>
+  </symbol>
+  <symbol id="i-plusminus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 8h6M7 5v6"/><path d="M14 16h6"/><path d="M20 5 8 19"/>
+  </symbol>
+  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 6h1M4 12h1M4 18h1"/><path d="M9 6h11M9 12h11M9 18h7"/>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 12h15"/><path d="m13 6 6 6-6 6"/>
+  </symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m7 10 5 5 5-5"/>
+  </symbol>
+  <symbol id="i-bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+    <path d="M4 7h16M4 12h16M4 17h16"/>
+  </symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/>
+  </symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4 8.4 8.4 0 1 0 20 14.2z"/>
+  </symbol>
+</svg><a class="skip" href="#main">К содержанию</a>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="../">
+      <svg class="brand-mark" viewBox="0 0 34 24" aria-hidden="true">
+        <path d="M3 14.5A6.5 6.5 0 0 1 9.5 8h15a6.5 6.5 0 0 1 0 13h-15A6.5 6.5 0 0 1 3 14.5Z" fill="none" stroke="currentColor" stroke-width="1.9"/>
+        <path d="M11 8.4V21M17 8.2V21M23 8.4V21" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".55"/>
+        <path d="M8.5 8c.6-3.2 3-5 6-5s5.4 1.8 6 5" fill="none" stroke="currentColor" stroke-width="1.7" opacity=".45"/>
+      </svg>
+      <span class="brand-t">Selecline BM1250C<span class="brand-s">неофициальная инструкция</span></span>
+    </a>
+
+    <nav class="nav" aria-label="Основные разделы">
+      <a href="../#bystryj-start">Быстрый старт</a>
       <a href="../programmy/">Программы</a>
       <a href="../recepty/" aria-current="page">Рецепты</a>
-      <a href="../kolobok/">Колобок</a>
-      <a href="../mery/">Меры</a>
-      <a href="../hlebopechka-auchan/">Печки Ашан</a>
-      <a href="../analog-judge-jea43/">Аналог</a>
+      <a href="../instrukciya/">Инструкция</a>
+      <details class="more">
+        <summary aria-label="Другие разделы">Ещё<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+        <div class="more-menu">
+          <a href="../manual-ru/">Перевод оригинальной инструкции</a>
+          <a href="../kolobok/">Колобок: сухое и жидкое тесто</a>
+          <a href="../mery/">Меры: граммы и ложки</a>
+          <a href="../specii/">Специи и добавки</a>
+          <a href="../hlebopechka-auchan/">Хлебопечки Ашан</a>
+          <a href="../analog-judge-jea43/">Аналог Judge JEA43</a>
+          <a href="../selecline-861382-bm1333/">Модель 861382 / BM1333</a>
+        </div>
+      </details>
     </nav>
-    <button class="theme-btn" type="button" aria-label="Переключить тему" onclick="var d=document.documentElement,n=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}">◐</button>
+
+    <button class="ibtn theme-btn" type="button" id="themeBtn" aria-label="Переключить тёмную тему">
+      <svg class="i-light" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-moon"/></svg>
+      <svg class="i-dark" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-sun"/></svg>
+    </button>
+    <button class="ibtn burger" type="button" id="burger" aria-label="Меню разделов" aria-expanded="false" aria-controls="mobnav">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bars"/></svg>
+    </button>
   </div>
+
+  <nav class="mobnav" id="mobnav" aria-label="Все разделы" hidden>
+    <a href="../#bystryj-start">Быстрый старт</a>
+    <a href="../programmy/">Программы</a>
+    <a href="../recepty/">Рецепты</a>
+    <a href="../instrukciya/">Инструкция</a>
+    <span class="mobnav-sep">Дальше по теме</span>
+    <a href="../manual-ru/">Перевод оригинальной инструкции</a>
+    <a href="../kolobok/">Колобок: сухое и жидкое тесто</a>
+    <a href="../mery/">Меры: граммы и ложки</a>
+    <a href="../specii/">Специи и добавки</a>
+    <a href="../hlebopechka-auchan/">Хлебопечки Ашан</a>
+    <a href="../analog-judge-jea43/">Аналог Judge JEA43</a>
+    <a href="../selecline-861382-bm1333/">Модель 861382 / BM1333</a>
+  </nav>
 </header>
 
-<main>
-  <div class="wrap">
-    <nav class="breadcrumbs" aria-label="Хлебные крошки">
-<a href="../">Главная</a> → Рецепты    </nav>
-<h1>Рецепты для хлебопечки Selecline BM1250C</h1>
-<p class="lead">Семь рецептов под конкретные программы этой печки — в граммах и миллилитрах, с указанием размера
-буханки и цвета корочки. Основа — книга рецептов <a href="../analog-judge-jea43/">Judge JEA43</a>,
-печки на том же контроллере.</p>
+<main id="main">
+<div class="shell prose">
+<nav class="crumbs" aria-label="Хлебные крошки">
+<a href="../">Главная</a><span aria-hidden="true">/</span><span>Рецепты</span></nav>
+  <h1>Рецепты для хлебопечки Selecline BM1250C</h1>
+  <p class="lead">Семь рецептов под конкретные программы этой печки — в граммах и миллилитрах, с указанием размера
+    буханки и цвета корочки. Основа — книга рецептов <a href="../analog-judge-jea43/">Judge JEA43</a>,
+    печки на том же контроллере.</p>
 
-<div class="grid">
-  <a class="rcard" href="../recepty/belyj-hleb/">
-    <span class="emoji">🍞</span>
-    <b>Белый хлеб — базовый рецепт</b>
-    <span>Программа 1 BASIC · 3:00 · 2.0 lb (≈ 900 г)</span>
-  </a>
-  <a class="rcard" href="../recepty/francuzskij-hleb/">
-    <span class="emoji">🥖</span>
-    <b>Французский хлеб</b>
-    <span>Программа 2 FRENCH · 3:50 · 2.0 lb (≈ 900 г)</span>
-  </a>
-  <a class="rcard" href="../recepty/celnozernovoj-hleb/">
-    <span class="emoji">🌾</span>
-    <b>Цельнозерновой хлеб</b>
-    <span>Программа 3 WHOLE WHEAT · 3:40 · 2.0 lb (≈ 900 г)</span>
-  </a>
-  <a class="rcard" href="../recepty/sladkij-hleb-s-suhofruktami/">
-    <span class="emoji">🍇</span>
-    <b>Сладкий хлеб с сухофруктами</b>
-    <span>Программа 5 SWEET · 2:50 · 1.5 lb (≈ 680 г)</span>
-  </a>
-  <a class="rcard" href="../recepty/sandvichnyj-hleb/">
-    <span class="emoji">🥪</span>
-    <b>Сэндвичный хлеб</b>
-    <span>Программа 11 SANDWICH · 2:55 · 1.5 lb (≈ 680 г)</span>
-  </a>
-  <a class="rcard" href="../recepty/aromatnyj-hleb-s-travami/">
-    <span class="emoji">🧄</span>
-    <b>Ароматный хлеб с чесноком и травами</b>
-    <span>Программа 1 BASIC · 3:00 · 2.0 lb (≈ 900 г)</span>
-  </a>
-  <a class="rcard" href="../recepty/belyj-hleb-variant-panasonic/">
-    <span class="emoji">🍞</span>
-    <b>Белый хлеб — влажный вариант (500 / 330)</b>
-    <span>Программа 1 BASIC · 3:00 · 2.0 lb (≈ 900 г)</span>
-  </a>
-</div>
+  <ul class="rlist">
+  <li>
+    <a href="../recepty/belyj-hleb/">
+      <span class="rl-main">
+        <span class="rl-t">Белый хлеб — базовый рецепт</span>
+        <span class="rl-m"><b>1 BASIC</b> · 3:00 · 2.0 lb (≈ 900 г)</span>
+      </span>
+<span class="rl-r">500 г <i>/</i> 275 мл</span>      <svg class="rl-a" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg>
+    </a>
+  </li>
+  <li>
+    <a href="../recepty/francuzskij-hleb/">
+      <span class="rl-main">
+        <span class="rl-t">Французский хлеб</span>
+        <span class="rl-m"><b>2 FRENCH</b> · 3:50 · 2.0 lb (≈ 900 г)</span>
+      </span>
+<span class="rl-r">480 г <i>/</i> 310 мл</span>      <svg class="rl-a" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg>
+    </a>
+  </li>
+  <li>
+    <a href="../recepty/celnozernovoj-hleb/">
+      <span class="rl-main">
+        <span class="rl-t">Цельнозерновой хлеб</span>
+        <span class="rl-m"><b>3 WHOLE WHEAT</b> · 3:40 · 2.0 lb (≈ 900 г)</span>
+      </span>
+<span class="rl-r">475 г <i>/</i> 250 мл</span>      <svg class="rl-a" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg>
+    </a>
+  </li>
+  <li>
+    <a href="../recepty/sladkij-hleb-s-suhofruktami/">
+      <span class="rl-main">
+        <span class="rl-t">Сладкий хлеб с сухофруктами</span>
+        <span class="rl-m"><b>5 SWEET</b> · 2:50 · 1.5 lb (≈ 680 г)</span>
+      </span>
+<span class="rl-r">445 г <i>/</i> 280 мл</span>      <svg class="rl-a" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg>
+    </a>
+  </li>
+  <li>
+    <a href="../recepty/sandvichnyj-hleb/">
+      <span class="rl-main">
+        <span class="rl-t">Сэндвичный хлеб</span>
+        <span class="rl-m"><b>11 SANDWICH</b> · 2:55 · 1.5 lb (≈ 680 г)</span>
+      </span>
+<span class="rl-r">450 г <i>/</i> 260 мл</span>      <svg class="rl-a" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg>
+    </a>
+  </li>
+  <li>
+    <a href="../recepty/aromatnyj-hleb-s-travami/">
+      <span class="rl-main">
+        <span class="rl-t">Ароматный хлеб с чесноком и травами</span>
+        <span class="rl-m"><b>1 BASIC</b> · 3:00 · 2.0 lb (≈ 900 г)</span>
+      </span>
+<span class="rl-r">500 г <i>/</i> 275 мл</span>      <svg class="rl-a" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg>
+    </a>
+  </li>
+  <li>
+    <a href="../recepty/belyj-hleb-variant-panasonic/">
+      <span class="rl-main">
+        <span class="rl-t">Белый хлеб — влажный вариант (500 / 330)</span>
+        <span class="rl-m"><b>1 BASIC</b> · 3:00 · 2.0 lb (≈ 900 г)</span>
+      </span>
+<span class="rl-r">500 г <i>/</i> 330 мл</span>      <svg class="rl-a" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg>
+    </a>
+  </li>
+</ul>
 
-<h2>Сводная таблица закладок</h2>
-<p>Быстрое сравнение: сколько воды идёт на муку в каждом рецепте. Именно это соотношение определяет, получится
-хлеб или в углах ведёрка останется сухая мука.</p>
-<div class="table-wrap">
-  <table>
-    <thead><tr><th>Рецепт</th><th>Программа</th><th>Мука</th><th>Вода</th><th>Дрожжи</th><th>Размер</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><a href="../recepty/belyj-hleb/">Белый хлеб — базовый рецепт</a></td>
-        <td class="num">1 BASIC</td>
-        <td class="num">500 г</td>
-        <td class="num">275 мл</td>
-        <td class="num">7 г</td>
-        <td class="num">2.0 lb (≈ 900 г)</td>
-      </tr>
-      <tr>
-        <td><a href="../recepty/francuzskij-hleb/">Французский хлеб</a></td>
-        <td class="num">2 FRENCH</td>
-        <td class="num">480 г</td>
-        <td class="num">310 мл</td>
-        <td class="num">7 г</td>
-        <td class="num">2.0 lb (≈ 900 г)</td>
-      </tr>
-      <tr>
-        <td><a href="../recepty/celnozernovoj-hleb/">Цельнозерновой хлеб</a></td>
-        <td class="num">3 WHOLE WHEAT</td>
-        <td class="num">475 г</td>
-        <td class="num">250 мл</td>
-        <td class="num">7 г</td>
-        <td class="num">2.0 lb (≈ 900 г)</td>
-      </tr>
-      <tr>
-        <td><a href="../recepty/sladkij-hleb-s-suhofruktami/">Сладкий хлеб с сухофруктами</a></td>
-        <td class="num">5 SWEET</td>
-        <td class="num">445 г</td>
-        <td class="num">280 мл</td>
-        <td class="num">7 г</td>
-        <td class="num">1.5 lb (≈ 680 г)</td>
-      </tr>
-      <tr>
-        <td><a href="../recepty/sandvichnyj-hleb/">Сэндвичный хлеб</a></td>
-        <td class="num">11 SANDWICH</td>
-        <td class="num">450 г</td>
-        <td class="num">260 мл</td>
-        <td class="num">7 г</td>
-        <td class="num">1.5 lb (≈ 680 г)</td>
-      </tr>
-      <tr>
-        <td><a href="../recepty/aromatnyj-hleb-s-travami/">Ароматный хлеб с чесноком и травами</a></td>
-        <td class="num">1 BASIC</td>
-        <td class="num">500 г</td>
-        <td class="num">275 мл</td>
-        <td class="num">7 г</td>
-        <td class="num">2.0 lb (≈ 900 г)</td>
-      </tr>
-      <tr>
-        <td><a href="../recepty/belyj-hleb-variant-panasonic/">Белый хлеб — влажный вариант (500 / 330)</a></td>
-        <td class="num">1 BASIC</td>
-        <td class="num">500 г</td>
-        <td class="num">330 мл</td>
-        <td class="num">1,5 ч. л.</td>
-        <td class="num">2.0 lb (≈ 900 г)</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
-<div class="note"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bulb"/></svg></span><div>Мука у разных производителей забирает разное количество воды. Цифры из таблицы —
-отправная точка; финальную корректировку всегда делают <a href="../kolobok/">по колобку</a> на 10–15-й минуте замеса.</div></div>
+  <h2 id="svodnaya-tablica">Сводная таблица закладок</h2>
+  <p>Быстрое сравнение: сколько воды идёт на муку в каждом рецепте. Именно это соотношение определяет, получится
+    хлеб или в углах ведёрка останется сухая мука.</p>
+  <div class="table-wrap">
+    <table class="tbl-stack">
+      <thead><tr><th>Рецепт</th><th>Программа</th><th>Мука</th><th>Вода</th><th>Дрожжи</th><th>Размер</th></tr></thead>
+      <tbody>
+        <tr>
+          <td data-l="Рецепт"><a href="../recepty/belyj-hleb/">Белый хлеб — базовый рецепт</a></td>
+          <td data-l="Программа" class="num">1 BASIC</td>
+          <td data-l="Мука" class="num">500 г</td>
+          <td data-l="Вода" class="num">275 мл</td>
+          <td data-l="Дрожжи" class="num">7 г</td>
+          <td data-l="Размер" class="num">2.0 lb (≈ 900 г)</td>
+        </tr>
+        <tr>
+          <td data-l="Рецепт"><a href="../recepty/francuzskij-hleb/">Французский хлеб</a></td>
+          <td data-l="Программа" class="num">2 FRENCH</td>
+          <td data-l="Мука" class="num">480 г</td>
+          <td data-l="Вода" class="num">310 мл</td>
+          <td data-l="Дрожжи" class="num">7 г</td>
+          <td data-l="Размер" class="num">2.0 lb (≈ 900 г)</td>
+        </tr>
+        <tr>
+          <td data-l="Рецепт"><a href="../recepty/celnozernovoj-hleb/">Цельнозерновой хлеб</a></td>
+          <td data-l="Программа" class="num">3 WHOLE WHEAT</td>
+          <td data-l="Мука" class="num">475 г</td>
+          <td data-l="Вода" class="num">250 мл</td>
+          <td data-l="Дрожжи" class="num">7 г</td>
+          <td data-l="Размер" class="num">2.0 lb (≈ 900 г)</td>
+        </tr>
+        <tr>
+          <td data-l="Рецепт"><a href="../recepty/sladkij-hleb-s-suhofruktami/">Сладкий хлеб с сухофруктами</a></td>
+          <td data-l="Программа" class="num">5 SWEET</td>
+          <td data-l="Мука" class="num">445 г</td>
+          <td data-l="Вода" class="num">280 мл</td>
+          <td data-l="Дрожжи" class="num">7 г</td>
+          <td data-l="Размер" class="num">1.5 lb (≈ 680 г)</td>
+        </tr>
+        <tr>
+          <td data-l="Рецепт"><a href="../recepty/sandvichnyj-hleb/">Сэндвичный хлеб</a></td>
+          <td data-l="Программа" class="num">11 SANDWICH</td>
+          <td data-l="Мука" class="num">450 г</td>
+          <td data-l="Вода" class="num">260 мл</td>
+          <td data-l="Дрожжи" class="num">7 г</td>
+          <td data-l="Размер" class="num">1.5 lb (≈ 680 г)</td>
+        </tr>
+        <tr>
+          <td data-l="Рецепт"><a href="../recepty/aromatnyj-hleb-s-travami/">Ароматный хлеб с чесноком и травами</a></td>
+          <td data-l="Программа" class="num">1 BASIC</td>
+          <td data-l="Мука" class="num">500 г</td>
+          <td data-l="Вода" class="num">275 мл</td>
+          <td data-l="Дрожжи" class="num">7 г</td>
+          <td data-l="Размер" class="num">2.0 lb (≈ 900 г)</td>
+        </tr>
+        <tr>
+          <td data-l="Рецепт"><a href="../recepty/belyj-hleb-variant-panasonic/">Белый хлеб — влажный вариант (500 / 330)</a></td>
+          <td data-l="Программа" class="num">1 BASIC</td>
+          <td data-l="Мука" class="num">500 г</td>
+          <td data-l="Вода" class="num">330 мл</td>
+          <td data-l="Дрожжи" class="num">1,5 ч. л.</td>
+          <td data-l="Размер" class="num">2.0 lb (≈ 900 г)</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
+  <div class="note"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bulb"/></svg></span><div>Мука у разных производителей забирает разное количество воды. Цифры из таблицы —
+    отправная точка; финальную корректировку всегда делают <a href="../kolobok/">по колобку</a> на 10–15-й минуте замеса.</div></div>
+</div>
 </main>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <p><strong>Selecline BM1250C</strong> — неофициальный справочник владельца. Материалы собраны из книги рецептов
-      <a href="../analog-judge-jea43/">Judge JEA43</a> (та же аппаратная платформа), отзывов владельцев и личной практики.</p>
-    <p>Сайт не связан с производителем и торговой сетью и не является официальной документацией. Проверяйте настройки по бумажной инструкции к своей печке.</p>
-    <p><a href="../instrukciya/">Инструкция</a> · <a href="../manual-ru/">Оригинал</a> · <a href="../programmy/">Программы</a> · <a href="../recepty/">Рецепты</a> · <a href="../kolobok/">Колобок</a> · <a href="../mery/">Меры</a> · <a href="../hlebopechka-auchan/">Печки Ашан</a> · <a href="../analog-judge-jea43/">Аналог</a></p>
+<footer class="ftr">
+  <div class="shell ftr-in">
+    <div class="ftr-about">
+      <p class="ftr-brand">Selecline BM1250C</p>
+      <p>Неофициальный справочник владельца. Материалы собраны из книги рецептов
+        <a href="../analog-judge-jea43/">Judge JEA43</a> — печки на той же аппаратной платформе, — из отзывов
+        владельцев и личной практики.</p>
+      <p>Сайт не связан с производителем и торговой сетью и не является официальной документацией.
+        Проверяйте настройки по бумажной инструкции к своей печке.</p>
+    </div>
+    <div class="ftr-nav">
+      <p class="ftr-h">Основное</p>
+<a href="../#bystryj-start">Быстрый старт</a><a href="../programmy/">Программы</a><a href="../recepty/">Рецепты</a><a href="../instrukciya/">Инструкция</a>    </div>
+    <div class="ftr-nav">
+      <p class="ftr-h">Дальше по теме</p>
+<a href="../manual-ru/">Перевод оригинальной инструкции</a><a href="../kolobok/">Колобок: сухое и жидкое тесто</a><a href="../mery/">Меры: граммы и ложки</a><a href="../specii/">Специи и добавки</a><a href="../hlebopechka-auchan/">Хлебопечки Ашан</a><a href="../analog-judge-jea43/">Аналог Judge JEA43</a><a href="../selecline-861382-bm1333/">Модель 861382 / BM1333</a>    </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  var d=document.documentElement;
+  var tb=document.getElementById('themeBtn');
+  if(tb)tb.addEventListener('click',function(){
+    var n=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=n;
+    try{localStorage.setItem('theme',n)}catch(e){}
+  });
+  var b=document.getElementById('burger'),m=document.getElementById('mobnav');
+  if(b&&m)b.addEventListener('click',function(){
+    var open=m.hasAttribute('hidden');
+    if(open){m.removeAttribute('hidden')}else{m.setAttribute('hidden','')}
+    b.setAttribute('aria-expanded',open?'true':'false');
+  });
+  document.addEventListener('click',function(e){
+    document.querySelectorAll('details.more[open]').forEach(function(el){
+      if(!el.contains(e.target))el.removeAttribute('open');
+    });
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Escape')return;
+    document.querySelectorAll('details.more[open]').forEach(function(el){el.removeAttribute('open')});
+    if(m&&!m.hasAttribute('hidden')){m.setAttribute('hidden','');b.setAttribute('aria-expanded','false')}
+  });
+})();
+</script>
 </body>
 </html>

@@ -18,11 +18,11 @@
 {% import "ig.html" as ig %}
 
 <div class="table-wrap">
-  <table>
+  <table class="tbl-stack">
     <thead><tr><th>Продукт</th><th>В рецепте</th><th>Чайных ложек</th><th>Столовых ложек</th></tr></thead>
     <tbody>
       {% for m in measures %}
-      <tr><td>{{ m.what }}</td><td class="num"><strong>{{ m.grams }}</strong></td><td class="num">{{ m.tsp }}</td><td class="num">{{ m.tbsp }}</td></tr>
+      <tr><td>{{ m.what }}</td><td data-l="В рецепте" class="num"><strong>{{ m.grams }}</strong></td><td data-l="Чайных ложек" class="num">{{ m.tsp }}</td><td data-l="Столовых ложек" class="num">{{ m.tbsp }}</td></tr>
       {% endfor %}
     </tbody>
   </table>

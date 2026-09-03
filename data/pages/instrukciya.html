@@ -49,10 +49,10 @@
 <h3>Размер буханки</h3>
 <p>Кнопка <strong>LOAF SIZE</strong> переключает два веса:</p>
 <div class="table-wrap">
-  <table>
+  <table class="tbl-stack">
     <thead><tr><th>На дисплее</th><th>Примерный вес</th><th>Когда выбирать</th></tr></thead>
     <tbody>
-      {% for s in sizes %}<tr><td class="num"><strong>{{ s.label }}</strong></td><td class="num">{{ s.grams }}</td><td>{{ s.note }}</td></tr>{% endfor %}
+      {% for s in sizes %}<tr><td class="num"><strong>{{ s.label }}</strong></td><td data-l="Вес" class="num">{{ s.grams }}</td><td data-l="Когда выбирать">{{ s.note }}</td></tr>{% endfor %}
     </tbody>
   </table>
 </div>
