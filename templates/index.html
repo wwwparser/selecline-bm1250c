@@ -14,7 +14,7 @@
       <ul class="facts">
         <li><b>15</b><span>программ</span></li>
         <li><b>500 г → 275 мл</b><span>мука и вода</span></li>
-        <li><b>2.0 lb ≈ 900 г</b><span>большая буханка</span></li>
+        <li><b>700 и 900 г</b><span>две буханки</span></li>
       </ul>
     </div>
     <div class="hero-img">
@@ -46,7 +46,7 @@
   {{ ig.panel_svg(programs) }}
   <dl class="defs">
     {% for b in buttons %}
-    <dt>{{ b.name }}</dt><dd>{{ b.what }}</dd>
+    <dt>{{ b.name }}{% if b.ru %}<span>{{ b.ru }}</span>{% endif %}</dt><dd>{{ b.what }}</dd>
     {% endfor %}
   </dl>
   <p><a class="link-more" href="{{ rel }}instrukciya/">Полная инструкция: закладка, отложенный старт, ошибки, уход {{ ig.ico("arrow") }}</a></p>

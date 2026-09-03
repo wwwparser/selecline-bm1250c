@@ -188,7 +188,7 @@ def website_ld(site, machine):
             "description": (
                 f'Хлебопечка {machine["model"]} — модель под собственной маркой '
                 f'{machine["brand"]} торговой сети {machine["retailer"]}. 15 программ, '
-                "размеры буханки 1.5 lb и 2.0 lb."
+                "размеры буханки 700 г и 900 г."
             ),
         },
     })

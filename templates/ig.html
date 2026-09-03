@@ -21,47 +21,52 @@
   ("TIME +", "отложить старт", false),
   ("TIME −", "убавить время", false),
   ("MENU", "программа 1–15", false),
-  ("LOAF SIZE", "1.5 lb / 2.0 lb", false),
+  ("LOAF SIZE", "размер 700 / 900 г", false),
   ("COLOUR", "цвет корочки", false),
-  ("START / STOP", "стоп — держать 3 с", true)
+  ("START / STOP", "пуск; стоп — 3 с", true)
 ] %}
-<svg class="panel" viewBox="0 0 720 344" role="img" aria-label="{{ title }}: список 15 программ, дисплей со временем 3:00 и кнопки TIME +, TIME −, MENU, LOAF SIZE, COLOUR, START/STOP" xmlns="http://www.w3.org/2000/svg">
-  <rect x="14" y="14" width="692" height="312" rx="14" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>
-  <rect x="14" y="14" width="692" height="312" rx="14" fill="none" stroke="var(--ink)" stroke-width="1" opacity=".14"/>
+<svg class="panel" viewBox="0 0 720 400" role="img" aria-label="{{ title }}: список 15 программ с русскими названиями, дисплей со временем 3:00 и кнопки TIME +, TIME −, MENU, LOAF SIZE, COLOUR, START/STOP" xmlns="http://www.w3.org/2000/svg">
+  <rect x="14" y="14" width="692" height="370" rx="14" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>
+  <rect x="14" y="14" width="692" height="370" rx="14" fill="none" stroke="var(--ink)" stroke-width="1" opacity=".14"/>
 
   <circle cx="46" cy="42" r="5" fill="var(--red)"/>
   <text x="60" y="46" font-size="11.5" letter-spacing=".08em" fill="var(--muted)">SELECLINE BM1250C</text>
 
-  <!-- печатный список программ -->
-  <g font-size="13" fill="var(--ink)">
-    {% for col in [programs[0:5], programs[5:10], programs[10:15]] %}
-      {% set cx = 46 + loop.index0 * 140 %}
-      {% for p in col %}
-      <text x="{{ cx }}" y="{{ 76 + loop.index0 * 21 }}"><tspan font-weight="700" fill="var(--green-ink)">{{ "%02d"|format(p.n) }}</tspan>  {{ p.en }}</text>
-      {% endfor %}
+  <!-- печатный список программ: английское название и перевод -->
+  {% for col in [programs[0:5], programs[5:10], programs[10:15]] %}
+    {% set cx = 46 + loop.index0 * 140 %}
+    {% for p in col %}
+      {% set cy = 78 + loop.index0 * 29 %}
+    <text x="{{ cx }}" y="{{ cy }}" font-size="12.5" fill="var(--ink)"><tspan font-weight="700" fill="var(--green-ink)">{{ "%02d"|format(p.n) }}</tspan> {{ p.en }}</text>
+    <text x="{{ cx }}" y="{{ cy + 12 }}" font-size="9.5" fill="var(--muted)">{{ p.ru|lower }}</text>
     {% endfor %}
-  </g>
+  {% endfor %}
 
   <!-- дисплей -->
-  <rect x="466" y="52" width="208" height="112" rx="10" fill="#1b2418"/>
+  <rect x="466" y="52" width="208" height="136" rx="10" fill="#1b2418"/>
   <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9ede86">
-    <text x="482" y="74" font-size="11" letter-spacing=".06em" opacity=".85">LIGHT · MEDIUM · DARK</text>
-    <text x="570" y="126" font-size="44" font-weight="700" text-anchor="middle" letter-spacing=".02em">3:00</text>
-    <text x="482" y="150" font-size="11" letter-spacing=".06em" opacity=".85">2.0 lb</text>
-    <text x="658" y="150" font-size="11" letter-spacing=".06em" text-anchor="end" opacity=".85">1.5 lb</text>
+    <text x="570" y="72" font-size="10" letter-spacing=".05em" text-anchor="middle" opacity=".85">LIGHT · MEDIUM · DARK</text>
+    <text x="570" y="86" font-size="9" letter-spacing=".02em" text-anchor="middle" opacity=".6">светлая · средняя · тёмная</text>
+    <text x="570" y="142" font-size="42" font-weight="700" text-anchor="middle" letter-spacing=".02em">3:00</text>
+    <text x="480" y="172" font-size="9" letter-spacing=".02em" opacity=".85">900 г · 2.0 lb</text>
+    <text x="660" y="172" font-size="9" letter-spacing=".02em" text-anchor="end" opacity=".85">700 г · 1.5 lb</text>
   </g>
 
-  <!-- кнопки с подписями -->
+  <!-- кнопки с русскими подписями -->
   {% for b in buttons %}
     {% set bx = 30 + loop.index0 * 111 %}
-    <rect x="{{ bx }}" y="200" width="99" height="42" rx="8"
+    <rect x="{{ bx }}" y="238" width="99" height="42" rx="8"
           fill="{{ 'var(--green)' if b[2] else 'var(--surface-2)' }}"
           stroke="{{ 'var(--green)' if b[2] else 'var(--line)' }}" stroke-width="1.6"/>
-    <text x="{{ bx + 49 }}" y="226" text-anchor="middle" font-size="{{ 12 if b[2] else 13 }}" font-weight="700"
+    <text x="{{ bx + 49 }}" y="264" text-anchor="middle" font-size="{{ 12 if b[2] else 13 }}" font-weight="700"
           letter-spacing=".02em" fill="{{ 'var(--on-green)' if b[2] else 'var(--ink-strong)' }}">{{ b[0] }}</text>
-    <path d="M{{ bx + 49 }} 252v14" stroke="var(--line)" stroke-width="1.4"/>
-    <text x="{{ bx + 49 }}" y="286" text-anchor="middle" font-size="12" fill="var(--muted)">{{ b[1] }}</text>
+    <path d="M{{ bx + 49 }} 290v14" stroke="var(--line)" stroke-width="1.4"/>
+    <text x="{{ bx + 49 }}" y="324" text-anchor="middle" font-size="12" fill="var(--muted)">{{ b[1] }}</text>
   {% endfor %}
+
+  <text x="360" y="360" text-anchor="middle" font-size="11.5" fill="var(--muted)">
+    Мелким шрифтом — перевод английских надписей на самой панели
+  </text>
 </svg>
 {% endmacro %}
 
@@ -172,7 +177,8 @@
     <a href="{{ rel }}recepty/{{ o.slug }}/">
       <span class="rl-main">
         <span class="rl-t">{{ o.h1 }}</span>
-        <span class="rl-m"><b>{{ o.program.n }} {{ o.program.en }}</b> · {{ o.program.time }} · {{ o.size }}</span>
+        <span class="rl-m"><b>{{ o.program.n }} {{ o.program.en }}</b> · {{ o.program.ru|lower }} ·
+          {{ o.program.time }} · {{ o.size.split('(')[0]|trim }}</span>
       </span>
       {% if flour and water %}<span class="rl-r">{{ flour }} <i>/</i> {{ water }}</span>{% endif %}
       <svg class="rl-a" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg>
@@ -189,8 +195,9 @@
   <div class="sheet-hd">
     <p class="kicker">Быстрый старт</p>
     <h2 id="sheet-h">Белый хлеб с первого раза</h2>
-    <p class="sheet-sub">Программа <b>{{ r.program.n }} {{ r.program.en }}</b> · <b>{{ r.size.split('(')[0]|trim }}</b> ·
-      корочка <b>{{ r.crust.split('—')[0]|trim }}</b> · <b>{{ r.program.time }}</b> на дисплее</p>
+    <p class="sheet-sub">Программа <b>{{ r.program.n }} {{ r.program.en }}</b> ({{ r.program.ru|lower }}) ·
+      буханка <b>{{ r.size.split('(')[0]|trim }}</b> · корочка <b>{{ r.crust }}</b> ·
+      на дисплее <b>{{ r.program.time }}</b></p>
   </div>
 
   <div class="sheet-grid">
@@ -207,10 +214,10 @@
     <section class="sheet-col">
       <h3><span class="sheet-n">2</span> Что выбрать на печке</h3>
       <dl class="ctrl">
-        <dt>MENU</dt><dd>{{ r.program.n }} {{ r.program.en }}</dd>
-        <dt>LOAF SIZE</dt><dd>{{ r.size }}</dd>
-        <dt>COLOUR</dt><dd>{{ r.crust }}</dd>
-        <dt>START</dt><dd>на дисплее {{ r.program.time }}</dd>
+        <dt>MENU<span>меню</span></dt><dd>{{ r.program.n }} {{ r.program.en }} <span>{{ r.program.ru|lower }}</span></dd>
+        <dt>LOAF SIZE<span>размер буханки</span></dt><dd>{{ r.size }}</dd>
+        <dt>COLOUR<span>цвет корочки</span></dt><dd>{{ r.crust }}</dd>
+        <dt>START<span>пуск</span></dt><dd>на дисплее {{ r.program.time }}</dd>
       </dl>
       <p class="sheet-fine">Если на дисплее другое время — выбрана не та программа. Проверять удобнее всего именно по нему.</p>
     </section>

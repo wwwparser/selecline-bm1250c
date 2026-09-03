@@ -11,9 +11,9 @@
   {% if flour and water %}<p class="r-ratio">{{ flour }} муки · {{ water }} воды</p>{% endif %}
 
   <p class="r-setup">
-    <span class="r-prog">{{ r.program.en }} {{ r.program.n }}</span>
-    <span>{{ r.size.split('(')[0]|trim }}</span>
-    <span>{{ r.crust.split('—')[0]|trim }}</span>
+    <span class="r-prog">{{ r.program.n }} {{ r.program.en }}<i>{{ r.program.ru|lower }}</i></span>
+    <span>{{ r.size.split('(')[0]|trim }}<i>буханка</i></span>
+    <span>{{ r.crust.split('—')[0]|trim }}<i>{{ r.crust.split('—')[1]|trim if '—' in r.crust else 'корочка' }}</i></span>
     <span class="r-time">{{ r.program.time }}</span>
   </p>
 
