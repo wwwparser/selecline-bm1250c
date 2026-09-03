@@ -119,10 +119,34 @@ git add -A && git commit -m "Что изменилось" && git push
 Чтобы страница попала в верхнее меню — добавьте её в `nav_primary` (четыре основных пункта)
 или в `nav_more` (выпадающий список «Ещё») в `data/site.json`.
 
+## Индексация
+
+Сайт подтверждён в обеих панелях вебмастера:
+
+- **Google Search Console** — ресурс с префиксом `https://wwwparser.github.io/selecline-bm1250c/`,
+  подтверждение файлом `static/googleeb95af5dc75d94bf.html`. Файл удалять нельзя —
+  подтверждение слетит.
+- **Яндекс.Вебмастер** — хост `https://wwwparser.github.io`. Яндекс не умеет подтверждать
+  подпапку, поэтому корень хоста отдаёт отдельный репозиторий
+  [wwwparser.github.io](https://github.com/wwwparser/wwwparser.github.io); файл подтверждения
+  `yandex_bd4e43f7af923ea5.html` лежит там.
+
+После заметного обновления содержимого стоит позвать робота Яндекса:
+
+```bash
+python indexnow.py          # отправит все адреса из docs/sitemap.xml
+python indexnow.py --dry    # посмотреть, что уйдёт
+```
+
+Ключ IndexNow лежит в `static/` и раздаётся из папки сайта, поэтому авторизует ровно наши
+адреса и не требует прав на весь хост. Google IndexNow не поддерживает — для него
+переобход запрашивается вручную через «Проверку URL» в Search Console.
+
 ## Структура
 
 ```
 build.py              генератор (Python + Jinja2)
+indexnow.py           отправка адресов в IndexNow (Яндекс)
 data/
   site.json           название, адрес сайта, меню (nav_primary + nav_more)
   machine.json        программы, кнопки, размеры, таблица мер
