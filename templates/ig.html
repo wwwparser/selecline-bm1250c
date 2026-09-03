@@ -3,39 +3,15 @@
 {% macro ico(name) %}<span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-{{ name }}"/></svg></span>{% endmacro %}
 
 
-{# ---------- Техническая иллюстрация печки (для первого экрана) ---------- #}
-{% macro machine_svg() %}
-<svg class="machine" viewBox="0 0 300 250" role="img" aria-label="Хлебопечка Selecline BM1250C: корпус, крышка со смотровым окном и панель управления" xmlns="http://www.w3.org/2000/svg">
-  <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
-    <!-- корпус -->
-    <path d="M40 74h220a10 10 0 0 1 10 10v134a10 10 0 0 1-10 10H40a10 10 0 0 1-10-10V84a10 10 0 0 1 10-10z" fill="var(--surface)"/>
-    <!-- крышка -->
-    <path d="M46 74V44a10 10 0 0 1 10-10h188a10 10 0 0 1 10 10v30" fill="var(--surface-2)"/>
-    <path d="M30 74h240" stroke-width="2.4"/>
-    <!-- ручка крышки -->
-    <path d="M128 34v-8a8 8 0 0 1 8-8h28a8 8 0 0 1 8 8v8" stroke-width="2.2"/>
-    <!-- смотровое окно -->
-    <rect x="110" y="46" width="80" height="22" rx="6" fill="var(--bg)"/>
-    <!-- панель: дисплей -->
-    <rect x="52" y="92" width="90" height="46" rx="6" fill="#1b2418" stroke="none"/>
-    <!-- вентиляционные прорези -->
-    <path d="M232 96v34M244 96v34M256 96v34" stroke-width="2" opacity=".35"/>
-    <!-- кнопки -->
-    <g stroke-width="1.9">
-      <rect x="52" y="152" width="40" height="20" rx="7"/>
-      <rect x="100" y="152" width="40" height="20" rx="7"/>
-      <rect x="148" y="152" width="40" height="20" rx="7"/>
-      <rect x="196" y="152" width="40" height="20" rx="7"/>
-      <rect x="52" y="184" width="56" height="24" rx="9" fill="var(--green)" stroke="var(--green)"/>
-    </g>
-    <!-- ножки -->
-    <path d="M60 228v8M240 228v8"/>
-  </g>
-  <g font-size="15" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9ede86">
-    <text x="97" y="122" text-anchor="middle">3:00</text>
-  </g>
-  <circle cx="216" cy="196" r="5" fill="var(--red)"/>
-</svg>
+{# ---------- Фотография панели управления ---------- #}
+{% macro panel_photo(rel, caption=None) %}
+<figure class="ph">
+  <img src="{{ rel }}photo/panel.jpg" width="540" height="510" loading="lazy"
+       alt="Панель управления Selecline BM1250C: список 15 программ, дисплей и кнопки Time+, Time−, Loaf size, Menu, Color, Start/Stop">
+  <figcaption>{% if caption %}{{ caption }}{% else %}Панель настоящей Selecline BM1250C. Список из 15 программ напечатан
+    прямо на ней, размеры буханки подписаны в граммах: <b>700 g</b> и <b>900 g</b>.
+    <a href="{{ rel }}foto-i-harakteristiki/">Все фотографии и характеристики</a>.{% endif %}</figcaption>
+</figure>
 {% endmacro %}
 
 

@@ -7,9 +7,6 @@
     <div class="hero-txt">
       <p class="kicker">Selecline · собственная марка сети Ашан (Auchan)</p>
       <h1>Хлебопечка Selecline BM1250C: инструкция, 15 программ и рецепты</h1>
-      <p class="lead">Полной инструкции к этой модели в интернете нет — в комплектной документации есть только
-        порядок добавления продуктов. Здесь она собрана заново: по книге рецептов печки на том же контроллере
-        и по практике владельцев.</p>
       <p class="hero-cta">
         <a class="btn" href="#bystryj-start">Испечь первый хлеб</a>
         <a class="btn btn-2" href="{{ rel }}instrukciya/">Открыть инструкцию</a>
@@ -20,7 +17,10 @@
         <li><b>2.0 lb ≈ 900 г</b><span>большая буханка</span></li>
       </ul>
     </div>
-    <div class="hero-img">{{ ig.machine_svg() }}</div>
+    <div class="hero-img">
+      <img src="{{ rel }}photo/hero.jpg" width="640" height="835"
+           alt="Хлебопечка Selecline BM1250C: белый корпус и панель управления с 15 программами">
+    </div>
   </div>
 </section>
 
@@ -42,6 +42,7 @@
   <h2 id="panel">Панель управления</h2>
   <p>Шесть кнопок и дисплей. Программа выбирается кнопкой MENU по кругу, а проверить, что выбрана нужная,
     проще всего по времени на дисплее.</p>
+  {{ ig.panel_photo(rel) }}
   {{ ig.panel_svg(programs) }}
   <dl class="defs">
     {% for b in buttons %}
@@ -49,6 +50,17 @@
     {% endfor %}
   </dl>
   <p><a class="link-more" href="{{ rel }}instrukciya/">Полная инструкция: закладка, отложенный старт, ошибки, уход {{ ig.ico("arrow") }}</a></p>
+
+  <h2 id="kak-vyglyadit">Как выглядит эта печка</h2>
+  <p>Марку Selecline сеть ставила на разную технику, поэтому сначала стоит убедиться, что печка та самая.
+    Главная примета — панель с напечатанным списком ровно из 15 программ и шестью кнопками.</p>
+  <div class="ph-row">
+    <img src="{{ rel }}photo/bm1250c-3.jpg" width="757" height="1010" loading="lazy" alt="Хлебопечка Selecline BM1250C спереди">
+    <img src="{{ rel }}photo/bm1250c-4.jpg" width="757" height="1010" loading="lazy" alt="Selecline BM1250C с открытой крышкой и установленным ведёрком">
+    <img src="{{ rel }}photo/bm1250c-6.jpg" width="757" height="1010" loading="lazy" alt="Ведёрко хлебопечки с надетой лопаткой-мешалкой">
+    <img src="{{ rel }}photo/bm1250c-8.jpg" width="757" height="1010" loading="lazy" alt="Шильдик на дне: Selecline 821850/BM1250C, 600 Вт">
+  </div>
+  <p><a class="link-more" href="{{ rel }}foto-i-harakteristiki/">Все восемь фотографий и таблица характеристик {{ ig.ico("arrow") }}</a></p>
 
   <h2 id="otkuda">Откуда взялась инструкция</h2>
   <p>Selecline BM1250C — это OEM-печка: тот же аппарат продавался под несколькими марками. У модели
@@ -58,6 +70,9 @@
   <p>Эта инструкция выложена здесь целиком: <a href="{{ rel }}manual/judge-jea43-instruction-manual-en.pdf">оригинальный
     английский PDF</a> и <a href="{{ rel }}manual-ru/">полный перевод на русский</a> — руководство и все 14 фирменных
     рецептов, включая пиццу, мармелад и йогурт.</p>
+  <p>Позже нашёлся и второй близнец — <a href="{{ rel }}maxwell-mw-3751w/">Maxwell MW-3751 W</a>, продававшийся
+    в России. У него совпадает не только список программ, но и время каждой из пятнадцати вплоть до минуты,
+    а инструкция сразу на русском.</p>
   <p class="row-links">
     <a class="btn btn-2" href="{{ rel }}manual-ru/">Читать перевод инструкции</a>
     <a class="link-more" href="{{ rel }}analog-judge-jea43/">Как нашли аналог {{ ig.ico("arrow") }}</a>
